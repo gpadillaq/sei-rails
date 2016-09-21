@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  root to: "home#index"
   resources :answer_types
   resources :answers
   resources :question_types

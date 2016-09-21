@@ -33,6 +33,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'foundation-rails', '~> 6.2', '>= 6.2.3.0'
 gem 'devise', '~> 4.2'
 group :development, :test do
+  gem 'selenium-webdriver'
+  gem "cucumber-rails", :require => false
+  gem "database_cleaner"
+  gem "capybara"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end
