@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @answer_type.descripcion %>
+</p>
+
+<p>
+  <strong>Scala:</strong>
+  <%= @answer_type.scala %>
+</p>
+
+<%= link_to 'Edit', edit_answer_type_path(@answer_type) %> |
+<%= link_to 'Back', answer_types_path %>

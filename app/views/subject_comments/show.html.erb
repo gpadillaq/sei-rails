@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User survey:</strong>
+  <%= @subject_comment.user_survey %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @subject_comment.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_subject_comment_path(@subject_comment) %> |
+<%= link_to 'Back', subject_comments_path %>

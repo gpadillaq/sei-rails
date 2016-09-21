@@ -1,0 +1,2 @@
+module AnswerTypesHelper
+end

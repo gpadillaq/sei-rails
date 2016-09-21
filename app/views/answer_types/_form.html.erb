@@ -1,0 +1,27 @@
+<%= form_for(answer_type) do |f| %>
+  <% if answer_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(answer_type.errors.count, "error") %> prohibited this answer_type from being saved:</h2>
+
+      <ul>
+      <% answer_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :descripcion %>
+    <%= f.text_area :descripcion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :scala %>
+    <%= f.text_field :scala %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

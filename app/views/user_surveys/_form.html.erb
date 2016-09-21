@@ -1,0 +1,52 @@
+<%= form_for(user_survey) do |f| %>
+  <% if user_survey.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_survey.errors.count, "error") %> prohibited this user_survey from being saved:</h2>
+
+      <ul>
+      <% user_survey.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_type_id %>
+    <%= f.text_field :user_type_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :level_id %>
+    <%= f.text_field :level_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :group_id %>
+    <%= f.text_field :group_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :interval_id %>
+    <%= f.text_field :interval_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject_id %>
+    <%= f.text_field :subject_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :activa %>
+    <%= f.check_box :activa %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module UserSurveysHelper
+end

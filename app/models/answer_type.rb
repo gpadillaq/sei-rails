@@ -1,0 +1,2 @@
+class AnswerType < ApplicationRecord
+end

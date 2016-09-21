@@ -1,0 +1,1 @@
+json.partial! "subject_comments/subject_comment", subject_comment: @subject_comment

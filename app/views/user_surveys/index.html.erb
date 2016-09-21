@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Surveys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>User type</th>
+      <th>Level</th>
+      <th>Group</th>
+      <th>Interval</th>
+      <th>Subject</th>
+      <th>Activa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_surveys.each do |user_survey| %>
+      <tr>
+        <td><%= user_survey.user %></td>
+        <td><%= user_survey.user_type %></td>
+        <td><%= user_survey.level %></td>
+        <td><%= user_survey.group %></td>
+        <td><%= user_survey.interval %></td>
+        <td><%= user_survey.subject %></td>
+        <td><%= user_survey.activa %></td>
+        <td><%= link_to 'Show', user_survey %></td>
+        <td><%= link_to 'Edit', edit_user_survey_path(user_survey) %></td>
+        <td><%= link_to 'Destroy', user_survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Survey', new_user_survey_path %>

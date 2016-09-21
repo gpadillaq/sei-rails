@@ -1,0 +1,1 @@
+json.array! @user_surveys, partial: 'user_surveys/user_survey', as: :user_survey
