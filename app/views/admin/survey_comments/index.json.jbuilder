@@ -1,0 +1,1 @@
+json.array! @survey_comments, partial: 'survey_comments/survey_comment', as: :survey_comment

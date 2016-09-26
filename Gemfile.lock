@@ -93,6 +93,8 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
+    font-awesome-rails (4.6.3.1)
+      railties (>= 3.2, < 5.1)
     foundation-rails (6.2.3.0)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -229,6 +231,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise (~> 4.2)
+  font-awesome-rails (~> 4.6, >= 4.6.3.1)
   foundation-rails (~> 6.2, >= 6.2.3.0)
   jbuilder (~> 2.5)
   jquery-rails

@@ -1,3 +1,9 @@
+<%
+  action = params["action"]
+  page_name ||= params["controller"]
+  body_class = "#{action} #{page_name}"
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,10 +17,35 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+<% if admin_user_signed_in? %>
+ <body class="<%=body_class%>">
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
+   <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+      <nav class="tab-bar">
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+        </section>
+      </nav>
 
-  </body>
+      <aside class="left-off-canvas-menu">
+        <%#= render "layouts/menu_bar" %>
+      </aside>
+
+      <section class="main-section">
+        <div class="small-12 columns page_container">
+          <div class="row column full-width">
+            <%= yield %>
+          </div>
+        </div>
+      </section>
+
+    <a class="exit-off-canvas"></a>
+    </div>
+  </div>
+</body>
+<% else %>
+ <%= yield %>
+<% end %>
 </html>

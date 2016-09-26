@@ -1,0 +1,12 @@
+<div id="menu_bar" class="menu_bar row">
+  <div id="login_nav">
+    <span class="current_user"><%=user_signed_in? ? current_user.email : ""%></span>
+    <%= link_to('Salir', destroy_user_session_path, :method => :delete) %>
+  </div>
+
+  <ul id="tabs" class="header-item">
+    <%# authorized_main_menu_items.each do |menu_item| %>
+      <%#= render "layouts/menu_item", menu_item: menu_item %>
+    <%# end %>
+  </ul>
+</div>

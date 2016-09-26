@@ -65,23 +65,12 @@ ActiveRecord::Schema.define(version: 20160921012222) do
     t.index ["user_type_id"], name: "index_questions_on_user_type_id"
   end
 
-  create_table "subject_comments", force: :cascade do |t|
+  create_table "survey_comments", force: :cascade do |t|
     t.integer  "user_survey_id"
     t.text     "descripcion"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.index ["user_survey_id"], name: "index_subject_comments_on_user_survey_id"
-  end
-
-  create_table "subject_results", force: :cascade do |t|
-    t.integer  "user_survey_id"
-    t.integer  "question_id"
-    t.integer  "answer_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["answer_id"], name: "index_subject_results_on_answer_id"
-    t.index ["question_id"], name: "index_subject_results_on_question_id"
-    t.index ["user_survey_id"], name: "index_subject_results_on_user_survey_id"
+    t.index ["user_survey_id"], name: "index_survey_comments_on_user_survey_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -89,6 +78,17 @@ ActiveRecord::Schema.define(version: 20160921012222) do
     t.text     "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "survey_results", force: :cascade do |t|
+    t.integer  "user_survey_id"
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["answer_id"], name: "index_survey_results_on_answer_id"
+    t.index ["question_id"], name: "index_survey_results_on_question_id"
+    t.index ["user_survey_id"], name: "index_survey_results_on_user_survey_id"
   end
 
   create_table "surveys", force: :cascade do |t|

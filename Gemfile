@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'foundation-rails', '~> 6.2', '>= 6.2.3.0'
 gem 'devise', '~> 4.2'
+gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.1'
 group :development, :test do
   gem 'selenium-webdriver'
   gem "cucumber-rails", :require => false

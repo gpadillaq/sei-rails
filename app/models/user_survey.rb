@@ -5,4 +5,9 @@ class UserSurvey < ApplicationRecord
   belongs_to :group
   belongs_to :interval
   belongs_to :subject
+
+  def display_name
+    [self.user_type.display_name, self.level.display_name,
+     self.group.display_name].join('/')
+  end
 end
