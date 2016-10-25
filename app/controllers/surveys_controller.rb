@@ -5,7 +5,7 @@ class SurveysController < BaseController
   # GET /surveys
   # GET /surveys.json
   def index
-    render 'directivos'
+    render 'docentes'
   end
 
   # GET /surveys/1
