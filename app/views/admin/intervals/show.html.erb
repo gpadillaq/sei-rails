@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
+<div class="small-6 column">
+  <p>
+    <strong>Nombre:</strong>
+    <%= @interval.nombre %>
+  </p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @interval.nombre %>
-</p>
+  <p>
+    <strong>Descripcion:</strong>
+    <%= @interval.descripcion %>
+  </p>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @interval.descripcion %>
-</p>
-
-<%= link_to 'Edit', edit_interval_path(@interval) %> |
-<%= link_to 'Back', intervals_path %>
+  <%= link_to 'Edit', edit_admin_interval_path(@interval) %> |
+  <%= link_to 'Back', admin_intervals_path %>
+</div>

@@ -1,27 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 column">
+  <h1>Groupos</h1>
 
-<h1>Groups</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @groups.each do |group| %>
+  <table class="table" border="0" cellpadding="0" cellspacing="0">
+    <thead>
       <tr>
-        <td><%= group.nombre %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Nombre</th>
+        <th class="action_column"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.nombre %></td>
+          <td class="action_column">
+            <div class="action_links">
+              <%= link_to "", admin_group_path(group), class: "fa fa-search view_link" %>
+              <%= link_to "", edit_admin_group_path(group), class: "fa fa-pencil edit_link" %>
+              <%= link_to "", admin_group_path(group), class: "fa fa-trash delete_link", confirm: "¿Está seguro de que quiere eliminar esto?", method: :delete %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Group', new_group_path %>
+  <br>
+
+  <%= link_to 'Crear Grupo', new_admin_group_path, class: 'button' %>
+</div>

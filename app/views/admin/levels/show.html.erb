@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 column">
+  <p>
+    <strong>Nombre:</strong>
+    <%= @level.nombre %>
+  </p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @level.nombre %>
-</p>
-
-<%= link_to 'Edit', edit_level_path(@level) %> |
-<%= link_to 'Back', levels_path %>
+  <%= link_to 'Edit', edit_admin_level_path(@level), class: 'button' %>
+  <%= link_to 'Back', admin_levels_path, class: 'button' %>
+</div>

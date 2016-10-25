@@ -1,0 +1,59 @@
+<%
+  action = params["action"]
+  page_name ||= params["controller"]
+  body_class = "#{action} #{page_name}"
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "SEI" %></title>
+
+    <%= stylesheet_link_tag    'admin/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin/application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+ <body class="<%=body_class%>">
+   <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+        <nav class="top-bar tab-bar" data-topbar role="navigation">
+          <ul class="title-area">
+            <li class="menu">
+              <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+            </li>
+          </ul>
+          <ul class="left">
+            <li><h1 class="title">
+              <%#= link_to(image_tag("logo.png", class:"logo-sei")) %> - <%#= content_for?(:title) ? yield(:title) : "" %>
+            </h1></li>
+          </ul>
+          <section class="top-bar-section">
+            <ul class="right">
+              <li class="has-dropdown">
+                <a href="#"><%=admin_signed_in? ? current_admin.email : ""%></a>
+                <ul class="dropdown">
+                  <li><%= link_to('Salir', destroy_admin_session_path, :method => :delete) %></li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </nav>
+
+        <aside class="left-off-canvas-menu">
+          <%= render "admin/layouts/menu_bar" %>
+        </aside>
+
+        <section class="main-section">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </section>
+        <a class="exit-off-canvas"></a>
+      </div>
+    </div>
+</body>
+</html>

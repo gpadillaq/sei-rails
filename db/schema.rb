@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921012222) do
+ActiveRecord::Schema.define(version: 20161025172256) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
 
   create_table "answer_types", force: :cascade do |t|
     t.text     "descripcion"
@@ -65,19 +82,19 @@ ActiveRecord::Schema.define(version: 20160921012222) do
     t.index ["user_type_id"], name: "index_questions_on_user_type_id"
   end
 
+  create_table "subjects", force: :cascade do |t|
+    t.text     "codigo"
+    t.text     "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "survey_comments", force: :cascade do |t|
     t.integer  "user_survey_id"
     t.text     "descripcion"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["user_survey_id"], name: "index_survey_comments_on_user_survey_id"
-  end
-
-  create_table "subjects", force: :cascade do |t|
-    t.text     "codigo"
-    t.text     "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "survey_results", force: :cascade do |t|

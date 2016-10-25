@@ -1,4 +1,4 @@
-class IntervalsController < ApplicationController
+class Admin::IntervalsController < Admin::BaseController
   before_action :set_interval, only: [:show, :edit, :update, :destroy]
 
   # GET /intervals
@@ -28,7 +28,7 @@ class IntervalsController < ApplicationController
 
     respond_to do |format|
       if @interval.save
-        format.html { redirect_to @interval, notice: 'Interval was successfully created.' }
+        format.html { redirect_to admin_interval_path(@interval), notice: 'Intervalo creado exitosamente.' }
         format.json { render :show, status: :created, location: @interval }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class IntervalsController < ApplicationController
   def update
     respond_to do |format|
       if @interval.update(interval_params)
-        format.html { redirect_to @interval, notice: 'Interval was successfully updated.' }
+        format.html { redirect_to admin_interval_path(@interval), notice: 'Intervalo actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @interval }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class IntervalsController < ApplicationController
   def destroy
     @interval.destroy
     respond_to do |format|
-      format.html { redirect_to intervals_url, notice: 'Interval was successfully destroyed.' }
+      format.html { redirect_to intervals_url, notice: 'Intervalo eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

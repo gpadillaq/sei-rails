@@ -1,4 +1,4 @@
-<%= form_for(interval) do |f| %>
+<%= form_for([:admin, interval]) do |f| %>
   <% if interval.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(interval.errors.count, "error") %> prohibited this interval from being saved:</h2>
@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label :nombre %>
-    <%= f.text_area :nombre %>
+    <%= f.text_field :nombre %>
   </div>
 
   <div class="field">
     <%= f.label :descripcion %>
-    <%= f.text_area :descripcion %>
+    <%= f.text_field :descripcion %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Guardar', class: 'button' %>
   </div>
 <% end %>

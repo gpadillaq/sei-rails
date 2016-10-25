@@ -30,9 +30,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'foundation-rails', '~> 6.2', '>= 6.2.3.0'
+gem 'foundation-rails', '~> 5.5.3'
 gem 'devise', '~> 4.2'
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.1'
+gem 'dehumanize', '~> 1.0.0'
 group :development, :test do
   gem 'selenium-webdriver'
   gem "cucumber-rails", :require => false

@@ -1,4 +1,4 @@
-<%= form_for(group) do |f| %>
+<%= form_for([:admin, group]) do |f| %>
   <% if group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
@@ -13,10 +13,10 @@
 
   <div class="field">
     <%= f.label :nombre %>
-    <%= f.text_area :nombre %>
+    <%= f.text_field :nombre %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Guardar', class: 'button' %>
   </div>
 <% end %>

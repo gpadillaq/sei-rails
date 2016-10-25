@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 column">
+  <p>
+    <strong>Codigo:</strong>
+    <%= @subject.codigo %>
+  </p>
 
-<p>
-  <strong>Codigo:</strong>
-  <%= @subject.codigo %>
-</p>
+  <p>
+    <strong>Nombre:</strong>
+    <%= @subject.nombre %>
+  </p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @subject.nombre %>
-</p>
-
-<%= link_to 'Edit', edit_admin_subject_path(@subject) %> |
-<%= link_to 'Back', admin_subjects_path %>
+  <%= link_to 'Edit', edit_admin_subject_path(@subject), class: 'button' %>
+  <%= link_to 'Back', admin_subjects_path, class: 'button' %>
+</div>

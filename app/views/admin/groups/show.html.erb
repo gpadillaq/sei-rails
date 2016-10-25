@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 column">
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @group.nombre %>
-</p>
+  <p>
+    <strong>Nombre:</strong>
+    <%= @group.nombre %>
+  </p>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+  <%= link_to 'Edit', edit_admin_group_path(@group), class: 'button' %>
+  <%= link_to 'Back', admin_groups_path, class: 'button' %>
+</div>

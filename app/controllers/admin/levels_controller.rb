@@ -1,4 +1,4 @@
-class LevelsController < ApplicationController
+class Admin::LevelsController < Admin::BaseController
   before_action :set_level, only: [:show, :edit, :update, :destroy]
 
   # GET /levels
@@ -28,7 +28,7 @@ class LevelsController < ApplicationController
 
     respond_to do |format|
       if @level.save
-        format.html { redirect_to @level, notice: 'Level was successfully created.' }
+        format.html { redirect_to admin_level_path(@level), notice: 'El nivel fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @level }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class LevelsController < ApplicationController
   def update
     respond_to do |format|
       if @level.update(level_params)
-        format.html { redirect_to @level, notice: 'Level was successfully updated.' }
+        format.html { redirect_to admin_level_path(@level), notice: 'El nivel fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @level }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class LevelsController < ApplicationController
   def destroy
     @level.destroy
     respond_to do |format|
-      format.html { redirect_to levels_url, notice: 'Level was successfully destroyed.' }
+      format.html { redirect_to admin_levels_url, notice: 'El nivel fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

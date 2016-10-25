@@ -1,0 +1,17 @@
+---
+- :label: Evaluados
+  :items:
+  - :label: Usuarios
+    :items:
+    - :label: Usuarios
+      :url: admin_users_path
+    - :label: Tipos de Usuarios
+      :url: admin_user_types_path
+  - :label: Asignaturas
+    :url: admin_subjects_path
+  - :label: Grupos
+    :url: admin_groups_path
+  - :label: Intervalos
+    :url: admin_intervals_path
+  - :label: Niveles
+    :url: admin_levels_path

@@ -1,0 +1,45 @@
+<div class="row panel">
+
+<h1>Escala de Apreciación Estudiantil de Ingenierías</h1>
+<p>
+  Con la finalidad de mejorar constantemente el desempeño de los profesores en nuestra Universidad, te pedimos evalúes el trabajo que han desarrollado cada uno de tus profesores. Es importante LEER CUIDADOSAMENTE y que reflexiones sobre cada una de las frases antes de asignar tu calificación. En caso de que un mismo profesor te imparta dos o más materias deberás de considerar su desempeño de manera independiente en cada una de ellas y que evalúes todos los aspectos considerados. La información que proporciones será tratada de manera confidencial y anónima.
+</p>
+
+<h2>Instrucciones:</h2>
+<p>
+  Para dar respuesta a cada aspecto evaluado, te pedimos marcar en la hoja de respuesta la opción que mejor refleje tu opinión respecto al desempeño de tu profesor en ese aspecto; utiliza para ello la siguiente escala.
+</p>
+
+<ol>
+  <li>Totalmente en desacuerdo</li>
+  <li>En desacuerdo</li>
+  <li>Ni en acuerdo, ni en desacuerdo</li>
+  <li>De acuerdo</li>
+  <li>Totalmente de acuerdo</li>
+</ol>
+<hr>
+<ul class="accordion" data-accordion role="tablist">
+  <li class="accordion-navigation">
+    <a href="#panel1d" role="tab" id="panel1d-heading" aria-controls="panel1d">Sistemas Operativos - Alonso Flores</a>
+    <div id="panel1d" class="content active" role="tabpanel" aria-labelledby="panel1d-heading">
+      <%= render 'alumnos_detalles' %>
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel2d"  role="tab" id="panel2d-heading" aria-controls="panel2d">Sistemas Informaticos - Jorge Molinas</a>
+    <div id="panel2d" class="content" role="tabpanel" aria-labelledby="panel2d-heading">
+      <%= render 'alumnos_detalles' %>
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel3d" role="tab" id="panel3d-heading" aria-controls="panel3d">Administración - Jorge Porta</a>
+    <div id="panel3d" class="content" role="tabpanel" aria-labelledby="panel3d-heading">
+      <%= render 'alumnos_detalles' %>
+    </div>
+  </li>
+</ul>
+
+<input type="button" name="name" value="Guardar" class="button">
+<br>
+<strong>Por tu colaboración, Gracias.</strong>
+</div>

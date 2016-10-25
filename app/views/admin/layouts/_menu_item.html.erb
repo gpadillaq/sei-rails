@@ -1,0 +1,27 @@
+<%
+  is_sub_menu_item ||= false
+  id = I18n.transliterate(menu_item[:label].dehumanize)
+  label = menu_item[:label]
+  url = eval(menu_item[:url].to_s) || "#"
+  items = menu_item[:items]
+  li_class = ""
+  ul_class = ""
+  if items.present?
+    li_class += " has-submenu" if items.present?
+    ul_class += "left-submenu"
+  end
+%>
+<li id="<%=id%>" class="<%=li_class%>">
+  <%= link_to label, url %>
+  <% if items.present? %>
+    <% if is_sub_menu_item %>
+      <span style="display: inline-block;"></span>
+    <% end %>
+    <ul class="<%=ul_class%>">
+      <li class="back"><a href="#"><%= label %></a></li>
+      <% items.each do |sub_menu_item| %>
+        <%= render "admin/layouts/menu_item", menu_item: sub_menu_item, is_sub_menu_item: true %>
+      <% end %>
+    </ul>
+  <% end %>
+</li>

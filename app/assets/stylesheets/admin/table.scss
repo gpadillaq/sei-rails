@@ -1,0 +1,50 @@
+table.table {
+  width: inherit;
+  th {
+    font-weight: bold;
+    text-align: center;
+    background: #353535;
+    color: #fff;
+    text-transform: uppercase;
+    > a:after {
+      position: relative;
+      left: 3px;
+      content: image-url("images/sort-white.png");
+    }
+    a {
+      color: #fff;
+    }
+  }
+  th, td {
+    font-size: 12px;
+    border: 1px solid #E5E5E5;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  div.action_links {
+    width: 5em;
+    visibility: hidden;
+    background: #616161 none repeat scroll 0 0;
+    text-align: center;
+    a {
+      color: white;
+      text-decoration: none;
+      margin-left: 0.3em;
+      margin-right: 0.3em;
+    }
+  }
+  tr:hover div.action_links {
+    visibility: visible;
+  }
+  tr {
+    th.action_column, td.action_column {
+      background: #dadada none repeat scroll 0 0;
+      border: none;
+      max-width: 40px;
+    }
+  }
+}
+
+body {
+  background-color: #dadada;
+}

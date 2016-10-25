@@ -1,29 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 column">
 
-<h1>Intervals</h1>
+  <h1>Intervalos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Descripcion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @intervals.each do |interval| %>
+  <table class="table" border="0" cellpadding="0" cellspacing="0">
+    <thead>
       <tr>
-        <td><%= interval.nombre %></td>
-        <td><%= interval.descripcion %></td>
-        <td><%= link_to 'Show', interval %></td>
-        <td><%= link_to 'Edit', edit_interval_path(interval) %></td>
-        <td><%= link_to 'Destroy', interval, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th class="action_column"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @intervals.each do |interval| %>
+        <tr>
+          <td><%= interval.nombre %></td>
+          <td><%= interval.descripcion %></td>
+          <td class="action_column">
+            <div class="action_links">
+              <%= link_to "", admin_interval_path(interval), class: "fa fa-search view_link" %>
+              <%= link_to "", edit_admin_interval_path(interval), class: "fa fa-pencil edit_link" %>
+              <%= link_to "", admin_interval_path(interval), class: "fa fa-trash delete_link", confirm: "¿Está seguro de que quiere eliminar esto?", method: :delete %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Interval', new_interval_path %>
+  <br>
+
+  <%= link_to 'Crear Intevalo', new_admin_interval_path, class: 'button' %>
+</div>

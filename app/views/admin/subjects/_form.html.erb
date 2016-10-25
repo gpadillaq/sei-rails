@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label :codigo %>
-    <%= f.text_area :codigo %>
+    <%= f.text_field :codigo %>
   </div>
 
   <div class="field">
     <%= f.label :nombre %>
-    <%= f.text_area :nombre %>
+    <%= f.text_field :nombre %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Guardar', class: 'button' %>
   </div>
 <% end %>
