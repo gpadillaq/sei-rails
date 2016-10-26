@@ -1,37 +1,35 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Comentarios de las evaluaciones</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Tipo de Usuario</th>
-      <th>Grupo</th>
-      <th>Nivel</th>
-      <th>Intervalo</th>
-      <th>Asignatura</th>
-      <th>Descripcion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @survey_comments.each do |survey_comment| %>
+<div class="small-12 column">
+  <div class="full-with">
+    <div class="small-8 column">
+      <h1>Comentarios de las evaluaciones</h1>
+    </div>
+    <div class="small-4 column">
+      <%= link_to 'Exportar', '', id: 'grafico', class: 'button'%>
+    </div>
+  </div>
+  <table class="table" border="0" cellpadding="0" cellspacing="0">
+    <thead>
       <tr>
-        <td><%= survey_comment.user_survey.user_type.display_name %></td>
-        <td><%= survey_comment.user_survey.group.display_name %></td>
-        <td><%= survey_comment.user_survey.level.display_name %></td>
-        <td><%= survey_comment.user_survey.interval.display_name %></td>
-        <td><%= survey_comment.user_survey.subject.display_name %></td>
-        <td><%= survey_comment.descripcion %></td>
-        <td><%= link_to 'Show', admin_survey_comment_path(survey_comment) %></td>
-        <td><%= link_to 'Edit', edit_admin_survey_comment_path(survey_comment) %></td>
-        <td><%= link_to 'Destroy', admin_survey_comment_path(survey_comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Tipo de Usuario</th>
+        <th>Grupo</th>
+        <th>Nivel</th>
+        <th>Intervalo</th>
+        <th>Asignatura</th>
+        <th>Descripcion</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Subject Comment', new_admin_survey_comment_path %>
+    <tbody>
+      <% @survey_comments.each do |survey_comment| %>
+        <tr>
+          <td><%= survey_comment.user_survey.user_type.display_name %></td>
+          <td><%= survey_comment.user_survey.group.display_name %></td>
+          <td><%= survey_comment.user_survey.level.display_name %></td>
+          <td><%= survey_comment.user_survey.interval.display_name %></td>
+          <td><%= survey_comment.user_survey.subject.display_name %></td>
+          <td><%= survey_comment.descripcion %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

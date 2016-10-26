@@ -1,1 +1,0 @@
-json.partial! "survey_comments/survey_comment", survey_comment: @survey_comment

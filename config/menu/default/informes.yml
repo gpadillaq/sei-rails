@@ -1,0 +1,7 @@
+---
+- :label: Resultados
+  :items:
+  - :label: Resultados
+    :url: admin_survey_results_path
+  - :label: Comentarios
+    :url: admin_survey_comments_path
