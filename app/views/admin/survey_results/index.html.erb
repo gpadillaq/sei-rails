@@ -8,6 +8,11 @@
       <%= link_to 'Exportar', '', id: 'grafico', class: 'button'%>
     </div>
   </div>
+<div id="modal-grafico" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Graficos de Resultados</h2>
+  <canvas id="canvas" width="300" height="300"></canvas>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
   <table class="table" border="0" cellpadding="0" cellspacing="0">
     <thead>
       <tr>
@@ -36,3 +41,4 @@
     </tbody>
   </table>
 </div>
+<%= javascript_include_tag    'admin/survey_results'%>

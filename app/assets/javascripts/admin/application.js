@@ -15,6 +15,12 @@
 //= require foundation
 //= require turbolinks
 //= require chart
+//= require underscore
+//= require backbone
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+window.SEI = {
+  Views: {}
+};

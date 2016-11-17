@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :admins
   namespace :admin do
     resources :users
-    root to: "survey_results#index"
+    root to: "/admin/survey_results#index"
     resources :answer_types
     resources :answers
     resources :question_types
