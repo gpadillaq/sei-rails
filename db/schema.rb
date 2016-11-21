@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025172256) do
+ActiveRecord::Schema.define(version: 20161121010553) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -126,10 +126,14 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.boolean  "activa"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "surveys_id"
+    t.integer  "survey_id"
     t.index ["group_id"], name: "index_user_surveys_on_group_id"
     t.index ["interval_id"], name: "index_user_surveys_on_interval_id"
     t.index ["level_id"], name: "index_user_surveys_on_level_id"
     t.index ["subject_id"], name: "index_user_surveys_on_subject_id"
+    t.index ["survey_id"], name: "index_user_surveys_on_survey_id"
+    t.index ["surveys_id"], name: "index_user_surveys_on_surveys_id"
     t.index ["user_id"], name: "index_user_surveys_on_user_id"
     t.index ["user_type_id"], name: "index_user_surveys_on_user_type_id"
   end

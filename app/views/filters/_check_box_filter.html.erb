@@ -1,0 +1,13 @@
+<% check_box_name = "q[#{field}]" %>
+<div class="row">
+  <div class="small-1 column">
+    <% if filter_value %>
+      <%= check_box_tag check_box_name, true, checked: "checked" %>
+    <% else %>
+      <%= check_box_tag check_box_name, true %>
+    <% end %>
+  </div>
+  <div class="small-11 column">
+    <%= f.label field, label %>
+  </div>
+</div>

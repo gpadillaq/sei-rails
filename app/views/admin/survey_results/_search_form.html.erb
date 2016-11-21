@@ -1,0 +1,17 @@
+<%= search_form_for @q, url: admin_survey_results_path do |f| %>
+  <fieldset>
+    <%= filter :user_survey_survey_id, "Evaluacion", f: f, as: :select, collection: Survey.all.map{|q| [q.display_name, q.id]} %>
+
+    <%= filter :user_survey_level_id, "Nivel", f: f, as: :select, collection: Level.all.map{|q| [q.display_name, q.id]} %>
+    <%= filter :user_survey_group_id, "Grupo", f: f, as: :select, collection: Group.all.map{|q| [q.display_name, q.id]} %>
+    <%= filter :user_survey_interval_id, "Intervalo", f: f, as: :select, collection: Interval.all.map{|q| [q.display_name, q.id]} %>
+    <%= filter :user_survey_subject_id, "Asignatura", f: f, as: :select, collection: UserType.all.map{|q| [q.display_name, q.id]} %>
+    <%= filter :user_survey_user_type_id, "Tipo de Usuario", f: f, as: :select, collection: UserType.all.map{|q| [q.display_name, q.id]} %>
+    <%= filter :question_id, "Pregunta", f: f, as: :select, collection: Question.all.map{|q| [q.display_name, q.id]} %>
+    <%= filter :answer_id, "Respuesta", f: f, as: :select, collection: Answer.all.map{|a| [a.display_name, a.id]} %>
+  </fieldset>
+  <div class="filter-actions">
+    <%= f.submit "Filtrar", :class => "apply-filter-button filter-action" %>
+    <%= link_to "Quitar Filtros", admin_survey_results_path, class: "clear-filter-button filter-action" %>
+  </div>
+<% end %>

@@ -4,9 +4,16 @@
       <h1>Comentarios de las evaluaciones</h1>
     </div>
     <div class="small-4 column">
-      <%= link_to 'Exportar', '', id: 'grafico', class: 'button'%>
+      <%= link_to 'Exportar', admin_survey_comments_path(format: 'xlsx', params: params), id: 'grafico', class: 'button'%>
+    </div>
+    <div class="row scopes">
+      <div class="small-12 column">
+        <%= scope :all, "Todos" %>
+        <%= render partial: "admin/survey_comments/search_form", layout: "layouts/search_form" %>
+      </div>
     </div>
   </div>
+
   <table class="table" border="0" cellpadding="0" cellspacing="0">
     <thead>
       <tr>

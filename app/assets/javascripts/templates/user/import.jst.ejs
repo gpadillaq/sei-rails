@@ -1,0 +1,37 @@
+<div class="small-12">
+  <div id="modal-import" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <div class="row">
+      <div class='panel small-6 medium-8 large-12 columns'>
+        <div class='panel-title light-blue small-12'>
+          <span>Importar Usuarios</span>
+        </div>
+        <div class='panel-content row'>
+          <div class='small-12 columns'>
+            <div class="row">
+              <div class="small-12 medium-6 large-4 columns field-label">
+                <label class = "label title">Seleccione el Archivo</label>
+              </div>
+              <div class="small-12 medium-6 large-7 columns field-input">
+                <input id="import-file" type="file" name="file">
+              </div>
+            </div>
+            <br><br>
+            <div class="row">
+              <div class="small-12 medium-6 large-7 columns field-input">
+                <input id="import-file-btn" type="button" name="guardar" value="Importar" class="button center">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="spinner small-7 medium-7 large-7 right ocultarItem">
+        <i class="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>
+        <span class="sr-only">Importando...</span>
+      </div>
+    </div> -->
+    <div class="row" id="errors-show-panel"></div>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+</div>

@@ -1,21 +1,32 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-
+  devise_for :users, controllers: {
+    sessions: 'sessions'
+  }
   resources :users
   resources :surveys
   root to: "surveys#index"
 
-  devise_for :admins
+  devise_for :admins, controllers: {
+    sessions: 'admin/sessions'
+  }
   namespace :admin do
-    resources :users
+    resources :users do
+      collection do
+        post :import
+      end
+    end
     root to: "/admin/survey_results#index"
     resources :answer_types
     resources :answers
     resources :question_types
     resources :questions
     resources :survey_comments
-    resources :survey_results
+    resources :survey_results do
+      collection do
+        get :xlsx
+      end
+    end
     resources :subjects
     resources :surveys
     resources :intervals

@@ -5,6 +5,7 @@ class UserSurvey < ApplicationRecord
   belongs_to :group
   belongs_to :interval
   belongs_to :subject
+  belongs_to :survey
 
   def display_name
     [self.user_type.display_name, self.level.display_name,

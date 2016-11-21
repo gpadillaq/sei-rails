@@ -17,10 +17,7 @@
 //= require chart
 //= require underscore
 //= require backbone
+//= require templates/user/import
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-
-window.SEI = {
-  Views: {}
-};
