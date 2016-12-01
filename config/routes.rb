@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: {
-    sessions: 'sessions'
-  }
-  resources :users
-  resources :surveys
-  root to: "surveys#index"
-
   devise_for :admins, controllers: {
     sessions: 'admin/sessions'
   }
@@ -35,5 +28,10 @@ Rails.application.routes.draw do
     resources :user_types
     resources :user_surveys
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: {
+    sessions: 'sessions'
+  }
+  root to: "surveys#index"
+  resources :users
+  resources :surveys
 end

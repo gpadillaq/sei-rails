@@ -62,7 +62,18 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def import
-    byebug
+    begin
+      if params[:file].present?
+        if User.import(params[:file])
+          flash[:notice] = 'Archivo Importado Exitosamente'
+        end
+      else
+        flash[:notice] = 'Por favor Seleccione un Archivo'
+      end
+      render js: "window.location = '#{admin_users_path}'"
+    rescue ArgumentError => e
+      render json: {msg: e.message}, status: 400
+    end
   end
 
   private

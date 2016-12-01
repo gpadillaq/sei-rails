@@ -33,7 +33,7 @@ SEI.Views.User = Backbone.View.extend({
         console.log('success');
       }).fail(function(data) {
         // $('div.spinner').addClass('ocultarItem');
-        // RubyLedger.Collections.errors.add([{el: '#errors-show-panel', msg: JSON.parse(data.responseText).msg}]);
+        RubyLedger.Collections.errors.add([{el: '#errors-show-panel', msg: JSON.parse(data.responseText).msg}]);
       });
     }
   }
