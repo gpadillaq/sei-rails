@@ -1,19 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div class="small-6 column">
+  <p>
+    <strong>Nombre:</strong>
+    <%= @survey.nombre %>
+  </p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @survey.nombre %>
-</p>
+  <p>
+    <strong>Inicio:</strong>
+    <%= @survey.inicio %>
+  </p>
 
-<p>
-  <strong>Inicio:</strong>
-  <%= @survey.inicio %>
-</p>
+  <p>
+    <strong>Fin:</strong>
+    <%= @survey.fin %>
+  </p>
 
-<p>
-  <strong>Fin:</strong>
-  <%= @survey.fin %>
-</p>
+  <%= link_to 'Editar', edit_admin_survey_path(@survey), class: 'button' %>
+  <%= link_to 'Atras', admin_surveys_path, class: 'button' %>
+  <button type="button" name="button" id="import-survey" class="button">Importar</button>
+</div>
 
-<%= link_to 'Edit', edit_admin_survey_path(@survey) %> |
-<%= link_to 'Back', admin_surveys_path %>
+<div class="small-12 columns">
+  <table class="table" border="0" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Tipo de Usuario</th>
+        <th>Nivel</th>
+        <th>Grupo</th>
+        <th>Intervalo</th>
+        <th>Asignatura</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @survey.user_surveys.each do |us| %>
+        <tr>
+          <th><%= us.user.display_name %></th>
+          <th><%= us.user_type.display_name %></th>
+          <th><%= us.level.display_name %></th>
+          <th><%= us.group.display_name %></th>
+          <th><%= us.interval.display_name %></th>
+          <th><%= us.subject.display_name %></th>
+        </tr>
+      <% end %>
+    </tbody>
+</div>

@@ -1,12 +1,12 @@
-SEI.Views.User = Backbone.View.extend({
+SEI.Views.Survey = Backbone.View.extend({
   el: 'body',
-  template: JST['templates/user/import'],
+  template: JST['templates/survey/import'],
   events: {
-    'click button#import': 'openModal',
-    'click input#import-file-btn': 'userImport'
+    'click button#import-survey': 'openModal',
+    'click input#import-file-survey-btn': 'surveyImport'
   },
   openModal: function (event) {
-    var target = $(event.target), modal_selector = 'modal-import';
+    var target = $(event.target), modal_selector = 'modal-import-survey';
     if ($(['#', modal_selector].join('')).exists()) {
       $('div.flashes').remove();
       $('#import-file').val('');
@@ -16,7 +16,7 @@ SEI.Views.User = Backbone.View.extend({
     }
     $(['#', modal_selector].join('')).foundation('reveal', 'open');
   },
-  userImport: function(event) {
+  surveyImport: function(event) {
     if (jQuery.isEmptyObject($('#import-file')[0].files[0])) {
       alert('Debe seleccionar un archivo.');
     } else {
@@ -24,7 +24,7 @@ SEI.Views.User = Backbone.View.extend({
       var frmData = new FormData();
       frmData.append('file', $('#import-file')[0].files[0]);
       $.ajax({
-        url: 'users/import',
+        url: 'survey/import',
         type: 'POST',
         cache: false,
         contentType: false,
@@ -42,5 +42,5 @@ SEI.Views.User = Backbone.View.extend({
 });
 
 $(document).ready(function(){
-  new SEI.Views.User();
+  new SEI.Views.Survey();
 });

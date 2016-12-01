@@ -1,0 +1,11 @@
+---
+- :label: Evaluaciones
+  :items:
+    - :label: Evaluaciones
+      :url: admin_surveys_path
+    # - :label: Grupos
+    #   :url: admin_groups_path
+    # - :label: Intervalos
+    #   :url: admin_intervals_path
+    # - :label: Niveles
+    #   :url: admin_levels_path

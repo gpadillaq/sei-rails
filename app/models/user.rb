@@ -26,6 +26,7 @@ class User < ApplicationRecord
   end
 
   def self.import(file)
+    @errors = Array.new
     begin
       self.transaction do
         file = self.open_spreadsheet(file)
@@ -43,7 +44,19 @@ class User < ApplicationRecord
           logger.info '************************************************************************************************'
           logger.info "* Registrando User: #{user_record[1]}"
           logger.info "*   Código: #{user_record[0]}"
-          @user.save!
+          begin
+            @user.save!
+          rescue => ex
+            byebug
+            logger.error '************************************************************************************************'
+            logger.error ex.message
+            logger.error ex.backtrace.join("\n")
+            logger.error '************************************************************************************************'
+            @errors.push([@user.display_name, @user.codigo].join("-"))
+          end
+        end
+        if @errors.present?
+          raise ArgumentError, @errors
         end
       end
     rescue => ex
@@ -51,7 +64,7 @@ class User < ApplicationRecord
       logger.error ex.message
       logger.error ex.backtrace.join("\n")
       logger.error '************************************************************************************************'
-      raise ArgumentError, @user.errors.full_messages.join(".\n ")
+      raise ArgumentError, @errors.join("<br>")
     end
   end
 

@@ -20,8 +20,16 @@ Rails.application.routes.draw do
         get :xlsx
       end
     end
-    resources :subjects
-    resources :surveys
+    resources :subjects do
+      collection do
+        post :import
+      end
+    end
+    resources :surveys do
+      collection do
+        post :import
+      end
+    end
     resources :intervals
     resources :groups
     resources :levels
