@@ -1,6 +1,6 @@
 class Level < ApplicationRecord
 
   def display_name
-    self.nombre    
+    self.nombre
   end
 end

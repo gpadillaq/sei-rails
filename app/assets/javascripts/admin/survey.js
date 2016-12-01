@@ -23,8 +23,9 @@ SEI.Views.Survey = Backbone.View.extend({
       // $('div.spinner').removeClass('ocultarItem');
       var frmData = new FormData();
       frmData.append('file', $('#import-file')[0].files[0]);
+      frmData.append('id', $('#import-survey').data('survey-id'));
       $.ajax({
-        url: 'survey/import',
+        url: 'import',
         type: 'POST',
         cache: false,
         contentType: false,

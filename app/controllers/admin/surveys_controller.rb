@@ -64,8 +64,10 @@ class Admin::SurveysController < Admin::BaseController
 
   def import
     begin
+      byebug
       if params[:file].present?
-        if User.import(params[:file])
+        @survey = Survey.find(params[:id])
+        if @survey.import(params[:file])
           flash[:notice] = 'Archivo Importado Exitosamente'
         end
       else

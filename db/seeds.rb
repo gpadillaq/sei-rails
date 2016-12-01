@@ -5,4 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.create!(email: 'sei@sei.com', password: '123123')
+
+UserType.where(nombre: 'Estudiante').first_or_create!
+UserType.where(nombre: 'Docente').first_or_create!
+UserType.where(nombre: 'Directivo').first_or_create!
+
+if Admin.all.blank?
+  Admin.create!(email: 'sei@sei.com', password: '123123')
+end

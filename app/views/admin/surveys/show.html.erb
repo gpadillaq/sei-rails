@@ -16,7 +16,7 @@
 
   <%= link_to 'Editar', edit_admin_survey_path(@survey), class: 'button' %>
   <%= link_to 'Atras', admin_surveys_path, class: 'button' %>
-  <button type="button" name="button" id="import-survey" class="button">Importar</button>
+  <button type="button" name="button" id="import-survey" data-survey-id="<%= @survey.id %>" class="button">Importar</button>
 </div>
 
 <div class="small-12 columns">
