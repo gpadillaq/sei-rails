@@ -64,7 +64,6 @@ class Admin::SurveysController < Admin::BaseController
 
   def import
     begin
-      byebug
       if params[:file].present?
         @survey = Survey.find(params[:id])
         if @survey.import(params[:file])
@@ -73,10 +72,18 @@ class Admin::SurveysController < Admin::BaseController
       else
         flash[:notice] = 'Por favor Seleccione un Archivo'
       end
-      render js: "window.location = '#{admin_users_path}'"
+      render js: "window.location = '#{admin_survey_path(@survey)}'"
     rescue ArgumentError => e
       render json: {msg: e.message}, status: 400
     end
+  end
+
+  def active
+    if params[:survey_id].present?
+      @survey = Survey.find(params[:survey_id])
+      @survey.activar(params[:active])
+    end
+    redirect_to admin_survey_path(@survey), notice: 'La evaluación ha sido abierta'
   end
 
   private

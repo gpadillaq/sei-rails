@@ -1,4 +1,4 @@
-<%= form_for(answer) do |f| %>
+<%= form_for([:admin, answer]) do |f| %>
   <% if answer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_type_id %>
-    <%= f.text_field :user_type_id %>
+    <%= f.label 'Tipo de Usuario' %>
+    <%= f.select :user_type_id, UserType.all.collect { |q| [ q.display_name, q.id ] } %>
   </div>
 
   <div class="field">
@@ -22,11 +22,11 @@
   </div>
 
   <div class="field">
-    <%= f.label :answer_type_id %>
-    <%= f.text_field :answer_type_id %>
+    <%= f.label 'Tipo de Respuesta' %>
+    <%= f.select :answer_type_id, AnswerType.all.collect { |r| [ r.display_name, r.id ] } %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Guardar', class: 'button' %>
   </div>
 <% end %>

@@ -28,7 +28,7 @@ class Admin::AnswersController < Admin::BaseController
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        format.html { redirect_to admin_answer_path @answer, notice: 'Answer was successfully created.' }
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::AnswersController < Admin::BaseController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
+        format.html { redirect_to admin_answer_path @answer, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::AnswersController < Admin::BaseController
   def destroy
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+      format.html { redirect_to admin_answers_url, notice: 'Answer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,4 @@
-class QuestionTypesController < ApplicationController
+class Admin::QuestionTypesController < Admin::BaseController
   before_action :set_question_type, only: [:show, :edit, :update, :destroy]
 
   # GET /question_types
@@ -28,7 +28,7 @@ class QuestionTypesController < ApplicationController
 
     respond_to do |format|
       if @question_type.save
-        format.html { redirect_to @question_type, notice: 'Question type was successfully created.' }
+        format.html { redirect_to admin_question_path @question_type, notice: 'Question type was successfully created.' }
         format.json { render :show, status: :created, location: @question_type }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class QuestionTypesController < ApplicationController
   def update
     respond_to do |format|
       if @question_type.update(question_type_params)
-        format.html { redirect_to @question_type, notice: 'Question type was successfully updated.' }
+        format.html { redirect_to admin_question_path @question_type, notice: 'Question type was successfully updated.' }
         format.json { render :show, status: :ok, location: @question_type }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class QuestionTypesController < ApplicationController
   def destroy
     @question_type.destroy
     respond_to do |format|
-      format.html { redirect_to question_types_url, notice: 'Question type was successfully destroyed.' }
+      format.html { redirect_to admin_question_types_url, notice: 'Question type was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,4 @@
-class Admin::AnswerTypesController < BaseController
+class Admin::AnswerTypesController < Admin::BaseController
   before_action :set_answer_type, only: [:show, :edit, :update, :destroy]
 
   # GET /answer_types

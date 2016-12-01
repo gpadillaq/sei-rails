@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       end
     end
     resources :surveys do
+      get :active
       collection do
         post :import
       end

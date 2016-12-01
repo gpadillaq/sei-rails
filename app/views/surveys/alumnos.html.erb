@@ -18,28 +18,24 @@
   <li>Totalmente de acuerdo</li>
 </ol>
 <hr>
-<ul class="accordion" data-accordion role="tablist">
-  <li class="accordion-navigation">
-    <a href="#panel1d" role="tab" id="panel1d-heading" aria-controls="panel1d">Sistemas Operativos - Alonso Flores</a>
-    <div id="panel1d" class="content active" role="tabpanel" aria-labelledby="panel1d-heading">
-      <%= render 'alumnos_detalles' %>
-    </div>
-  </li>
-  <li class="accordion-navigation">
-    <a href="#panel2d"  role="tab" id="panel2d-heading" aria-controls="panel2d">Sistemas Informaticos - Jorge Molinas</a>
-    <div id="panel2d" class="content" role="tabpanel" aria-labelledby="panel2d-heading">
-      <%= render 'alumnos_detalles' %>
-    </div>
-  </li>
-  <li class="accordion-navigation">
-    <a href="#panel3d" role="tab" id="panel3d-heading" aria-controls="panel3d">Administración - Jorge Porta</a>
-    <div id="panel3d" class="content" role="tabpanel" aria-labelledby="panel3d-heading">
-      <%= render 'alumnos_detalles' %>
-    </div>
-  </li>
-</ul>
+<%= form_for(@survey) do |f| %>
+  <ul class="accordion" data-accordion role="tablist">
+    <% @user_surveys.each do |user_survey| %>
+      <li class="accordion-navigation">
+        <a href="#panel<%= user_survey.id%>d" role="tab" id="panel<%= user_survey.id%>d-heading" aria-controls="panel<%= user_survey.id%>d">
+          <%= user_survey.subject.display_name %> - <%= user_survey.docente.try(:display_name) %>
+        </a>
+        <div id="panel<%= user_survey.id%>d" class="content active" role="tabpanel" aria-labelledby="panel<%= user_survey.id%>d-heading">
+          <%= render 'alumnos_detalles' %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 
-<input type="button" name="name" value="Guardar" class="button">
+  <div class="actions">
+    <%= f.submit 'Guardar', class: 'button' %>
+  </div>
+<% end %>
 <br>
 <strong>Por tu colaboración, Gracias.</strong>
 </div>

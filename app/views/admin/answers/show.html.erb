@@ -1,19 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="small-12 column">
 
-<p>
-  <strong>User type:</strong>
-  <%= @answer.user_type %>
-</p>
+  <p>
+    <strong>Tipo de Usuario:</strong>
+    <%= @answer.user_type.try(:display_name) %>
+  </p>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @answer.descripcion %>
-</p>
+  <p>
+    <strong>Descripcion:</strong>
+    <%= @answer.descripcion %>
+  </p>
 
-<p>
-  <strong>Answer type:</strong>
-  <%= @answer.answer_type %>
-</p>
+  <p>
+    <strong>Tipo de Respuesta:</strong>
+    <%= @answer.answer_type.try(:display_name) %>
+  </p>
 
-<%= link_to 'Edit', edit_answer_path(@answer) %> |
-<%= link_to 'Back', answers_path %>
+  <%= link_to 'Editar', edit_admin_answer_path(@answer), class: 'button' %>
+  <%= link_to 'Atras', admin_answers_path, class: 'button' %>
+</div>

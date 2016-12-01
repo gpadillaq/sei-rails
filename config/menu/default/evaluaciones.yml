@@ -3,9 +3,15 @@
   :items:
     - :label: Evaluaciones
       :url: admin_surveys_path
-    # - :label: Grupos
-    #   :url: admin_groups_path
-    # - :label: Intervalos
-    #   :url: admin_intervals_path
-    # - :label: Niveles
-    #   :url: admin_levels_path
+    - :label: Preguntas
+      :items:
+        - :label: Preguntas
+          :url: admin_questions_path
+        - :label: Tipo Preguntas
+          :url: admin_question_types_path
+    - :label: Respuestas
+      :items:
+        - :label: Respuestas
+          :url: admin_answers_path
+        - :label: Tipo Respuestas
+          :url: admin_answer_types_path

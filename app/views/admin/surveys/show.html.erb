@@ -17,6 +17,7 @@
   <%= link_to 'Editar', edit_admin_survey_path(@survey), class: 'button' %>
   <%= link_to 'Atras', admin_surveys_path, class: 'button' %>
   <button type="button" name="button" id="import-survey" data-survey-id="<%= @survey.id %>" class="button">Importar</button>
+  <%= link_to 'Activar', admin_survey_active_path(@survey), class: 'button' %>
 </div>
 
 <div class="small-12 columns">
@@ -34,12 +35,12 @@
     <tbody>
       <% @survey.user_surveys.each do |us| %>
         <tr>
-          <th><%= us.user.display_name %></th>
-          <th><%= us.user_type.display_name %></th>
-          <th><%= us.level.display_name %></th>
-          <th><%= us.group.display_name %></th>
-          <th><%= us.interval.display_name %></th>
-          <th><%= us.subject.display_name %></th>
+          <td><%= us.user.display_name %></td>
+          <td><%= us.user_type.display_name %></td>
+          <td><%= us.level.display_name %></td>
+          <td><%= us.group.display_name %></td>
+          <td><%= us.interval.display_name %></td>
+          <td><%= us.subject.display_name %></td>
         </tr>
       <% end %>
     </tbody>

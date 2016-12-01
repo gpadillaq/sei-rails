@@ -1,6 +1,12 @@
 class Survey < ApplicationRecord
   has_many :user_surveys
 
+  PLATILLAS = {
+    1 => 'alumnos',
+    2 => 'docentes',
+    3 => 'directivos'
+  }
+
   def display_name
     [self.inicio, self.fin].join(' a ')
   end
@@ -12,9 +18,7 @@ class Survey < ApplicationRecord
         file = User.open_spreadsheet(file)
         logger.info '************************************************************************************************'
         logger.info "* Se Inició Importación Masiva con Fecha: #{Date.today}"
-        @survey = self
         (2..file.last_row).each do |row|
-
           user_survey_record = file.row(row)
           atributos = {
             user_id: User.find_by_codigo(user_survey_record.first.to_s).try(:id),
@@ -22,24 +26,22 @@ class Survey < ApplicationRecord
             level_id: Level.find_by_id(user_survey_record.third).try(:id),
             group_id: Group.find_by_id(user_survey_record.fourth).try(:id),
             interval_id: Interval.find_by_id(user_survey_record.fifth).try(:id),
-            subject_id: Subject.find_by_codigo(user_survey_record.last).try(:id)
+            subject_id: Subject.find_by_codigo(user_survey_record.last).try(:id),
+            survey_id: self.id
           }
-          byebug
-          @survey.user_surveys.build(atributos)
+          @user_survey = UserSurvey.new(atributos)
           logger.info '************************************************************************************************'
           logger.info "* Registrando User: #{user_survey_record[1]}"
           logger.info "*   Survey: #{self.id}"
         end
         begin
-          byebug
-          @survey.save!
+          @user_survey.save!
         rescue => ex
-          byebug
           logger.error '************************************************************************************************'
-          # logger.error ex.message
+          logger.error ex.message
           logger.error ex.backtrace.join("\n")
           logger.error '************************************************************************************************'
-          # @errors.push([@survey.display_name, @user.codigo].join("-"))
+          @errors.push([@user_survey.try(:user).try(:display_name), @user_survey.try(:subject).try(:codigo)].join("-"))
         end
         if @errors.present?
           raise ArgumentError, @errors
@@ -47,10 +49,32 @@ class Survey < ApplicationRecord
       end
     rescue => ex
       logger.error '************************************************************************************************'
-      # logger.error ex.message
+      logger.error ex.message
       logger.error ex.backtrace.join("\n")
       logger.error '************************************************************************************************'
       raise ArgumentError, @errors.join("<br>")
     end
+  end
+
+  def activar(state)
+    users_list = Array.new
+    self.user_surveys.each do |user_survey|
+      users_list.push(user_survey.user)
+    end
+    users_list.uniq.each do |user|
+      UserMailer.password_email(user).deliver_now
+    end
+    self.update(active: true)
+  end
+
+  def self.user_surveys_active(current_user)
+    survey = Survey.where(active: true).where('inicio >= ? and fin <= ?', Date.today, Date.today).first
+    user_survey_available = survey.user_surveys.where(user_id: current_user.id)
+    user_type = user_survey_available.first.user_type
+    plantilla = PLATILLAS[user_type.id]
+    questions = Question.where(user_type_id: user_type.id)
+    answers = Answer.where(user_type_id: user_type.id)
+
+    [survey, user_survey_available, plantilla, questions, answers]
   end
 end

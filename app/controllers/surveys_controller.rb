@@ -5,7 +5,8 @@ class SurveysController < BaseController
   # GET /surveys
   # GET /surveys.json
   def index
-    render 'docentes'
+    @survey, @user_surveys, @plantilla, @questions, @answers = Survey.user_surveys_active(current_user)
+    render @plantilla
   end
 
   # GET /surveys/1

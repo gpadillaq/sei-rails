@@ -1,31 +1,32 @@
 <div class="small-12 column">
 
-<h1>Niveles</h1>
+  <h1>Niveles</h1>
 
-<table class="table" border="0" cellpadding="0" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th class="action_column"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @levels.each do |level| %>
+  <table class="table" border="0" cellpadding="0" cellspacing="0">
+    <thead>
       <tr>
-        <td><%= level.nombre %></td>
-        <td class="action_column">
-          <div class="action_links">
-            <%= link_to "", admin_level_path(level), class: "fa fa-search view_link" %>
-            <%= link_to "", edit_admin_level_path(level), class: "fa fa-pencil edit_link" %>
-            <%= link_to "", admin_level_path(level), class: "fa fa-trash delete_link", confirm: "¿Está seguro de que quiere eliminar esto?", method: :delete %>
-          </div>
-        </td>
+        <th>Nombre</th>
+        <th class="action_column"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @levels.each do |level| %>
+        <tr>
+          <td><%= level.nombre %></td>
+          <td class="action_column">
+            <div class="action_links">
+              <%= link_to "", admin_level_path(level), class: "fa fa-search view_link" %>
+              <%= link_to "", edit_admin_level_path(level), class: "fa fa-pencil edit_link" %>
+              <%= link_to "", admin_level_path(level), class: "fa fa-trash delete_link", confirm: "¿Está seguro de que quiere eliminar esto?", method: :delete %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Crear Nivel', new_admin_level_path, class: 'button' %>
+  <br>
+
+  <%= link_to 'Crear Nivel', new_admin_level_path, class: 'button' %>
+</div>

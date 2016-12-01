@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121010553) do
+ActiveRecord::Schema.define(version: 20161201194628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20161121010553) do
     t.date     "fin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "active"
   end
 
   create_table "user_surveys", force: :cascade do |t|
@@ -130,6 +131,8 @@ ActiveRecord::Schema.define(version: 20161121010553) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "survey_id"
+    t.integer  "docente_id"
+    t.index ["docente_id"], name: "index_user_surveys_on_docente_id", using: :btree
     t.index ["group_id"], name: "index_user_surveys_on_group_id", using: :btree
     t.index ["interval_id"], name: "index_user_surveys_on_interval_id", using: :btree
     t.index ["level_id"], name: "index_user_surveys_on_level_id", using: :btree
@@ -179,4 +182,5 @@ ActiveRecord::Schema.define(version: 20161121010553) do
   add_foreign_key "user_surveys", "surveys"
   add_foreign_key "user_surveys", "user_types"
   add_foreign_key "user_surveys", "users"
+  add_foreign_key "user_surveys", "users", column: "docente_id"
 end
