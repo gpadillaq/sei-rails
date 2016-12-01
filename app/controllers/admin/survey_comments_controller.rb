@@ -4,7 +4,15 @@ class Admin::SurveyCommentsController < Admin::BaseController
   # GET /survey_comments
   # GET /survey_comments.json
   def index
-    @survey_comments = SurveyComment.all
+    respond_to do |format|
+      @q = SurveyComment.ransack(params[:q])
+      format.html do
+        @survey_comments = @q.result(distinct: true)
+      end
+      format.xlsx do
+        @survey_comments = @q.result(distinct: true)
+      end
+    end
   end
 
   # GET /survey_comments/1

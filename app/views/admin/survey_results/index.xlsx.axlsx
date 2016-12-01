@@ -1,0 +1,18 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Resultado de las evaluaciones") do |sheet|
+  render partial: 'admin/header',
+         locals: {
+           wb: wb, sheet: sheet, merge: 7
+         }
+  sheet.add_row(["Tipo de Usuario", "Grupo", "Nivel", "Intervalo", "Asignatura", "Pregunta", "Respuesta"], style: @title_cell)
+  @survey_results.each do |survey_result|
+    sheet.add_row([survey_result.user_survey.user_type.display_name,
+      survey_result.user_survey.group.display_name,
+      survey_result.user_survey.level.display_name,
+      survey_result.user_survey.interval.display_name,
+      survey_result.user_survey.subject.display_name,
+      survey_result.question.display_name,
+      survey_result.answer.display_name
+    ])
+  end
+end

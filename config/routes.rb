@@ -1,28 +1,45 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-
-  resources :users
-  resources :surveys
-  root to: "surveys#index"
-
-  devise_for :admins
+  devise_for :admins, controllers: {
+    sessions: 'admin/sessions'
+  }
   namespace :admin do
-    resources :users
-    root to: "survey_results#index"
+    resources :users do
+      collection do
+        post :import
+      end
+    end
+    root to: "/admin/survey_results#index"
     resources :answer_types
     resources :answers
     resources :question_types
     resources :questions
     resources :survey_comments
-    resources :survey_results
-    resources :subjects
-    resources :surveys
+    resources :survey_results do
+      collection do
+        get :xlsx
+      end
+    end
+    resources :subjects do
+      collection do
+        post :import
+      end
+    end
+    resources :surveys do
+      collection do
+        post :import
+      end
+    end
     resources :intervals
     resources :groups
     resources :levels
     resources :user_types
     resources :user_surveys
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: {
+    sessions: 'sessions'
+  }
+  root to: "surveys#index"
+  resources :users
+  resources :surveys
 end

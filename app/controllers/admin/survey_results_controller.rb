@@ -4,7 +4,15 @@ class Admin::SurveyResultsController < Admin::BaseController
   # GET /survey_results
   # GET /survey_results.json
   def index
-    @survey_results = SurveyResult.all
+    respond_to do |format|
+      @q = SurveyResult.ransack(params[:q])
+      format.html do
+        @survey_results = @q.result(distinct: true)
+      end
+      format.xlsx do
+        @survey_results = @q.result(distinct: true)
+      end
+    end
   end
 
   # GET /survey_results/1
@@ -69,6 +77,7 @@ class Admin::SurveyResultsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_result_params
-      params.require(:survey_result).permit(:user_survey_id, :question_id, :answer_id)
+      params.require(:survey_result)
+            .permit(:user_survey_id, :question_id, :answer_id, :q)
     end
 end

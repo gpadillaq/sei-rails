@@ -14,6 +14,12 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require chart
+//= require underscore
+//= require backbone
+//= require templates/user/import
+//= require templates/subject/import
+//= require templates/survey/import
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

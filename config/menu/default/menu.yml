@@ -1,5 +1,7 @@
 ---
 - :name: 'evaluados'
   :priority: 1
-- :name: 'informes'
+- :name: 'evaluaciones'
   :priority: 2
+- :name: 'informes'
+  :priority: 3

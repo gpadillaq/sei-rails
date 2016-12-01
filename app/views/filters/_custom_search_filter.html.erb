@@ -1,0 +1,8 @@
+<div class="row custom-search-filter">
+  <div class="small-6 column">
+    <%= select_tag("#{field}_p", options_for_predicate_select(predicate), class: "predicate") %>
+  </div>
+  <div class="small-6 column">
+    <%= text_field_tag("q[#{field}]", filter_value, class: "value", type: "search", data: {name: field}) %>
+  </div>
+</div>

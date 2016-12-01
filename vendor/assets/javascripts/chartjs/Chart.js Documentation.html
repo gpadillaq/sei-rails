@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html class="wf-proximanova-n4-active wf-proximanova-n6-active wf-active"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<title>Chart.js Documentation</title>
+		<link href="Chart.js%20Documentation_files/styles.css" rel="stylesheet">
+		<script src="Chart.js%20Documentation_files/ga.js" async="" type="text/javascript"></script><script src="Chart.js%20Documentation_files/jquery.js"></script>
+		<script src="Chart.js%20Documentation_files/prettify.js"></script>
+		<script src="Chart.js%20Documentation_files/Chart.js"></script>
+		<script type="text/javascript" src="Chart.js%20Documentation_files/puc1imu.js"></script>
+		<style type="text/css">.tk-proxima-nova{font-family:"proxima-nova",sans-serif;}</style><link href="Chart.js%20Documentation_files/d.css" rel="stylesheet"><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	</head>
+	<body>
+	<div class="promoBanner">
+		<div class="inner">Enter the <a href="http://chartjs.challengepost.com/">Chart.js Dashboard Challenge</a> to create a browser-based dashboard with 3 or more Chart.js charts</div>
+	</div>
+	<div class="redBorder"></div>
+	<div class="greenBorder"></div>
+	<div class="yellowBorder"></div>
+	<div id="wrapper">
+		<nav>	
+			<dl>
+			<dt><a href="#gettingStarted">Getting started</a></dt><dd><a href="#gettingStarted-includeChart.js">Include Chart.js</a></dd><dd><a href="#gettingStarted-creatingAChart">Creating a chart</a></dd><dt><a href="#lineChart">Line chart</a></dt><dd><a href="#lineChart-introduction">Introduction</a></dd><dd><a href="#lineChart-exampleUsage">Example usage</a></dd><dd><a href="#lineChart-dataStructure">Data structure</a></dd><dd><a href="#lineChart-chartOptions">Chart options</a></dd><dt><a href="#barChart">Bar chart</a></dt><dd><a href="#barChart-introduction">Introduction</a></dd><dd><a href="#barChart-exampleUsage">Example usage</a></dd><dd><a href="#barChart-dataStructure">Data structure</a></dd><dd><a href="#barChart-chartOptions">Chart options</a></dd><dt><a href="#radarChart">Radar chart</a></dt><dd><a href="#radarChart-introduction">Introduction</a></dd><dd><a href="#radarChart-exampleUsage">Example usage</a></dd><dd><a href="#radarChart-dataStructure">Data structure</a></dd><dd><a href="#radarChart-chartOptions">Chart options</a></dd><dt><a href="#polarAreaChart">Polar area chart</a></dt><dd><a href="#polarAreaChart-introduction">Introduction</a></dd><dd><a href="#polarAreaChart-exampleUsage">Example usage</a></dd><dd><a href="#polarAreaChart-dataStructure">Data structure</a></dd><dd><a href="#polarAreaChart-chartOptions">Chart options</a></dd><dt><a href="#pieChart">Pie chart</a></dt><dd><a href="#pieChart-introduction">Introduction</a></dd><dd><a href="#pieChart-exampleUsage">Example usage</a></dd><dd><a href="#pieChart-dataStructure">Data structure</a></dd><dd><a href="#pieChart-chartOptions">Chart options</a></dd><dt><a href="#doughnutChart">Doughnut chart</a></dt><dd><a href="#doughnutChart-introduction">Introduction</a></dd><dd><a href="#doughnutChart-exampleUsage">Example usage</a></dd><dd><a href="#doughnutChart-dataStructure">Data structure</a></dd><dd><a href="#doughnutChart-chartOptions">Chart options</a></dd><dt><a href="#generalIssues">General issues</a></dt><dd><a href="#generalIssues-chartInteractivity">Chart interactivity</a></dd><dd><a href="#generalIssues-browserSupport">Browser support</a></dd><dd><a href="#generalIssues-bugs&amp;Issues">Bugs &amp; issues</a></dd><dd><a href="#generalIssues-license">License</a></dd></dl>
+		</nav>
+		
+		<div id="contentWrapper">
+			<h1 id="mainHeader">Chart.js Documentation</h1>
+			<h2 id="introText">Everything you need to know to create great looking charts using Chart.js</h2>
+			<article id="gettingStarted">
+				<h1>Getting started</h1>
+				<h2 id="gettingStarted-includeChart.js">Include Chart.js</h2>
+				<p>First we need to include the Chart.js library on the page. The library occupies a global variable of <code><span class="typ">Chart</span></code>.</p>
+				<pre data-type="html"><code><span class="tag"><span class="tag">&lt;script</span></span><span class="pln"><span class="pln"> </span></span><span class="atn"><span class="atn">src</span></span><span class="pun"><span class="pun">=</span></span><span class="atv"><span class="atv">"Chart.js"</span></span><span class="tag"><span class="tag">&gt;&lt;/script&gt;</span></span></code></pre>
+				<h2 id="gettingStarted-creatingAChart">Creating a chart</h2>
+				<p>To create a chart, we need to instantiate the Chart class. To do 
+this, we need to pass in the 2d context of where we want to draw the 
+chart. Here's an example.</p>
+				<pre data-type="html"><code><span class="tag"><span class="tag">&lt;canvas</span></span><span class="pln"><span class="pln"> </span></span><span class="atn"><span class="atn">id</span></span><span class="pun"><span class="pun">=</span></span><span class="atv"><span class="atv">"myChart"</span></span><span class="pln"><span class="pln"> </span></span><span class="atn"><span class="atn">width</span></span><span class="pun"><span class="pun">=</span></span><span class="atv"><span class="atv">"400"</span></span><span class="pln"><span class="pln"> </span></span><span class="atn"><span class="atn">height</span></span><span class="pun"><span class="pun">=</span></span><span class="atv"><span class="atv">"400"</span></span><span class="tag"><span class="tag">&gt;&lt;/canvas&gt;</span></span></code></pre>
+				<pre data-type="javascript"><code><span class="com"><span class="com">//Get the context of the canvas element we want to select</span></span><span class="pln"><span class="pln">
+</span></span><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> ctx </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> document</span></span><span class="pun"><span class="pun">.</span></span><span class="pln"><span class="pln">getElementById</span></span><span class="pun"><span class="pun">(</span></span><span class="str"><span class="str">"myChart"</span></span><span class="pun"><span class="pun">).</span></span><span class="pln"><span class="pln">getContext</span></span><span class="pun"><span class="pun">(</span></span><span class="str"><span class="str">"2d"</span></span><span class="pun"><span class="pun">);</span></span><span class="pln"><span class="pln">
+</span></span><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> myNewChart </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">PolarArea</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<p>We can also get the context of our canvas with jQuery. To do 
+this, we need to get the DOM node out of the jQuery collection, and call
+ the <code><span class="pln">getContext</span><span class="pun">(</span><span class="str">"2d"</span><span class="pun">)</span></code> method on that.</p>
+				<pre data-type="javascript"><code><span class="com"><span class="com">//Get context with jQuery - using jQuery's .get() method.</span></span><span class="pln"><span class="pln">
+</span></span><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> ctx </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> $</span></span><span class="pun"><span class="pun">(</span></span><span class="str"><span class="str">"#myChart"</span></span><span class="pun"><span class="pun">).</span></span><span class="kwd"><span class="kwd">get</span></span><span class="pun"><span class="pun">(</span></span><span class="lit"><span class="lit">0</span></span><span class="pun"><span class="pun">).</span></span><span class="pln"><span class="pln">getContext</span></span><span class="pun"><span class="pun">(</span></span><span class="str"><span class="str">"2d"</span></span><span class="pun"><span class="pun">);</span></span><span class="pln"><span class="pln">
+</span></span><span class="com"><span class="com">//This will get the first returned node in the jQuery collection.</span></span><span class="pln"><span class="pln">
+</span></span><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> myNewChart </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<p>After we've instantiated the Chart class on the canvas we want to draw on, Chart.js will handle the scaling for retina displays.</p>
+				<p>With the Chart class set up, we can go on to create one of the 
+charts Chart.js has available. In the example below, we would be drawing
+ a Polar area chart.</p>
+				<pre data-type="javascript"><code><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">PolarArea</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">options</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<p>We call a method of the name of the chart we want to create. We 
+pass in the data for that chart type, and the options for that chart as 
+parameters. Chart.js will merge the options you pass in with the default
+ options for that chart type.</p>
+			</article>	
+			
+<article id="lineChart">
+				<h1>Line chart</h1>
+				<h2 id="lineChart-introduction">Introduction</h2>
+				<p>A line chart is a way of plotting data points on a line.</p>
+				<p>Often, it is used to show trend data, and the comparison of two data sets.</p>
+				<h2 id="lineChart-exampleUsage">Example usage</h2>
+				<canvas style="width: 600px; height: 400px;" id="line" data-type="Line" width="600" height="400"></canvas>
+				<pre data-type="javascript"><code><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">Line</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">options</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<h2 id="lineChart-dataStructure">Data structure</h2>	
+				<pre data-type="javascript"><code data-for="line"><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> data </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+	labels </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="str"><span class="str">"January"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"February"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"March"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"April"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"May"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"June"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"July"</span></span><span class="pun"><span class="pun">],</span></span><span class="pln"><span class="pln">
+	datasets </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+			fillColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,0.5)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			strokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointStrokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#fff"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			data </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="lit"><span class="lit">65</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">59</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">90</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">81</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">56</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">55</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">40</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+			fillColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,0.5)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			strokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointStrokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#fff"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			data </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="lit"><span class="lit">28</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">48</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">40</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">19</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">96</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">27</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">}</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+				<p>The line chart requires an array of labels for each of the data points. This is show on the X axis.</p>
+				<p>The data for line charts is broken up into an array of datasets. 
+Each dataset has a colour for the fill, a colour for the line and 
+colours for the points and strokes of the points. These colours are 
+strings just like CSS. You can use RGBA, RGB, HEX or HSL notation.</p>
+				
+				<h2 id="lineChart-chartOptions">Chart options</h2>
+				<pre data-type="javascript"><code><span class="typ"><span class="typ">Line</span></span><span class="pun"><span class="pun">.</span></span><span class="pln"><span class="pln">defaults </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+				
+	</span></span><span class="com"><span class="com">//Boolean - If we show the scale above the chart data			</span></span><span class="pln"><span class="pln">
+	scaleOverlay </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - If we want to override with a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleOverride </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//** Required if scaleOverride is true **</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The number of steps in a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The value jump in the hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleStepWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The scale starting value</span></span><span class="pln"><span class="pln">
+	scaleStartValue </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//String - Colour of the scale line	</span></span><span class="pln"><span class="pln">
+	scaleLineColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(0,0,0,.1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of the scale line	</span></span><span class="pln"><span class="pln">
+	scaleLineWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show labels on the scale	</span></span><span class="pln"><span class="pln">
+	scaleShowLabels </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Interpolated JS string - can access value</span></span><span class="pln"><span class="pln">
+	scaleLabel </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"&lt;%=value%&gt;"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font declaration for the scale label</span></span><span class="pln"><span class="pln">
+	scaleFontFamily </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"'Arial'"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Scale label font size in pixels	</span></span><span class="pln"><span class="pln">
+	scaleFontSize </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">12</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font weight style	</span></span><span class="pln"><span class="pln">
+	scaleFontStyle </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"normal"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font colour	</span></span><span class="pln"><span class="pln">
+	scaleFontColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#666"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">	
+	
+	</span></span><span class="com"><span class="com">///Boolean - Whether grid lines are shown across the chart</span></span><span class="pln"><span class="pln">
+	scaleShowGridLines </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Colour of the grid lines</span></span><span class="pln"><span class="pln">
+	scaleGridLineColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(0,0,0,.05)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Width of the grid lines</span></span><span class="pln"><span class="pln">
+	scaleGridLineWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">	
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether the line is curved between points</span></span><span class="pln"><span class="pln">
+	bezierCurve </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show a dot for each point</span></span><span class="pln"><span class="pln">
+	pointDot </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Radius of each point dot in pixels</span></span><span class="pln"><span class="pln">
+	pointDotRadius </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">3</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of point dot stroke</span></span><span class="pln"><span class="pln">
+	pointDotStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show a stroke for datasets</span></span><span class="pln"><span class="pln">
+	datasetStroke </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of dataset stroke</span></span><span class="pln"><span class="pln">
+	datasetStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to fill the dataset with a colour</span></span><span class="pln"><span class="pln">
+	datasetFill </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to animate the chart</span></span><span class="pln"><span class="pln">
+	animation </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Number - Number of animation steps</span></span><span class="pln"><span class="pln">
+	animationSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">60</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Animation easing effect</span></span><span class="pln"><span class="pln">
+	animationEasing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"easeOutQuart"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Function - Fires when the animation is complete</span></span><span class="pln"><span class="pln">
+	onAnimationComplete </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pln"><span class="pln">
+	
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+			</article>	
+			
+<article id="barChart">
+				<h1>Bar chart</h1>
+				<h2 id="barChart-introduction">Introduction</h2>
+				<p>A bar chart is a way of showing data as bars.</p>
+				<p>It is sometimes used to show trend data, and the comparison of multiple data sets side by side.</p>
+				<h2 id="barChart-exampleUsage">Example usage</h2>
+				<canvas style="width: 600px; height: 400px;" id="bar" data-type="Bar" width="600" height="400"></canvas>
+				<pre data-type="javascript"><code><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">Bar</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">options</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<h2 id="barChart-dataStructure">Data structure</h2>	
+				<pre data-type="javascript"><code data-for="bar"><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> data </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+	labels </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="str"><span class="str">"January"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"February"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"March"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"April"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"May"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"June"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"July"</span></span><span class="pun"><span class="pun">],</span></span><span class="pln"><span class="pln">
+	datasets </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+			fillColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,0.5)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			strokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			data </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="lit"><span class="lit">65</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">59</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">90</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">81</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">56</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">55</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">40</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+			fillColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,0.5)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			strokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			data </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="lit"><span class="lit">28</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">48</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">40</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">19</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">96</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">27</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">}</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+				<p>The bar chart has the a very similar data structure to the line 
+chart, and has an array of datasets, each with colours and an array of 
+data. Again, colours are in CSS format.</p>
+				<p>We have an array of labels too for display. In the example, we are showing the same data as the previous line chart example.</p>
+				
+				<h2 id="barChart-chartOptions">Chart options</h2>
+				<pre data-type="javascript"><code><span class="typ"><span class="typ">Bar</span></span><span class="pun"><span class="pun">.</span></span><span class="pln"><span class="pln">defaults </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+				
+	</span></span><span class="com"><span class="com">//Boolean - If we show the scale above the chart data			</span></span><span class="pln"><span class="pln">
+	scaleOverlay </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - If we want to override with a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleOverride </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//** Required if scaleOverride is true **</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The number of steps in a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The value jump in the hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleStepWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The scale starting value</span></span><span class="pln"><span class="pln">
+	scaleStartValue </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//String - Colour of the scale line	</span></span><span class="pln"><span class="pln">
+	scaleLineColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(0,0,0,.1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of the scale line	</span></span><span class="pln"><span class="pln">
+	scaleLineWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show labels on the scale	</span></span><span class="pln"><span class="pln">
+	scaleShowLabels </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Interpolated JS string - can access value</span></span><span class="pln"><span class="pln">
+	scaleLabel </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"&lt;%=value%&gt;"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font declaration for the scale label</span></span><span class="pln"><span class="pln">
+	scaleFontFamily </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"'Arial'"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Scale label font size in pixels	</span></span><span class="pln"><span class="pln">
+	scaleFontSize </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">12</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font weight style	</span></span><span class="pln"><span class="pln">
+	scaleFontStyle </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"normal"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font colour	</span></span><span class="pln"><span class="pln">
+	scaleFontColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#666"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">	
+	
+	</span></span><span class="com"><span class="com">///Boolean - Whether grid lines are shown across the chart</span></span><span class="pln"><span class="pln">
+	scaleShowGridLines </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Colour of the grid lines</span></span><span class="pln"><span class="pln">
+	scaleGridLineColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(0,0,0,.05)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Width of the grid lines</span></span><span class="pln"><span class="pln">
+	scaleGridLineWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">	
+
+	</span></span><span class="com"><span class="com">//Boolean - If there is a stroke on each bar	</span></span><span class="pln"><span class="pln">
+	barShowStroke </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of the bar stroke	</span></span><span class="pln"><span class="pln">
+	barStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Spacing between each of the X value sets</span></span><span class="pln"><span class="pln">
+	barValueSpacing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">5</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Spacing between data sets within X values</span></span><span class="pln"><span class="pln">
+	barDatasetSpacing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to animate the chart</span></span><span class="pln"><span class="pln">
+	animation </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Number - Number of animation steps</span></span><span class="pln"><span class="pln">
+	animationSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">60</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Animation easing effect</span></span><span class="pln"><span class="pln">
+	animationEasing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"easeOutQuart"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Function - Fires when the animation is complete</span></span><span class="pln"><span class="pln">
+	onAnimationComplete </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pln"><span class="pln">
+	
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+			</article>						
+			
+			<article id="radarChart">
+				<h1>Radar chart</h1>
+				<h2 id="radarChart-introduction">Introduction</h2>
+				<p>A radar chart is a way of showing multiple data points and the variation between them.</p>
+				<p>They are often useful for comparing the points of two or more different data sets</p>
+				<h2 id="radarChart-exampleUsage">Example usage</h2>
+				<canvas style="width: 400px; height: 400px;" id="radar" data-type="Radar" width="400" height="400"></canvas>
+				<pre data-type="javascript"><code><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">Radar</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">options</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<h2 id="radarChart-dataStructure">Data structure</h2>	
+				<pre data-type="javascript"><code data-for="radar"><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> data </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+	labels </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="str"><span class="str">"Eating"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"Drinking"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"Sleeping"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"Designing"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"Coding"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"Partying"</span></span><span class="pun"><span class="pun">,</span></span><span class="str"><span class="str">"Running"</span></span><span class="pun"><span class="pun">],</span></span><span class="pln"><span class="pln">
+	datasets </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+			fillColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,0.5)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			strokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(220,220,220,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointStrokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#fff"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			data </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="lit"><span class="lit">65</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">59</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">90</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">81</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">56</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">55</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">40</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+			fillColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,0.5)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			strokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(151,187,205,1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			pointStrokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#fff"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+			data </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="lit"><span class="lit">28</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">48</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">40</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">19</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">96</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">27</span></span><span class="pun"><span class="pun">,</span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+		</span></span><span class="pun"><span class="pun">}</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">]</span></span><span class="pln"><span class="pln">
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+				<p>For a radar chart, usually you will want to show a label on each 
+point of the chart, so we include an array of strings that we show 
+around each point in the chart. If you do not want this, you can either 
+not include the array of labels, or choose to hide them in the chart 
+options.</p>
+				<p>For the radar chart data, we have an array of datasets. Each of 
+these is an object, with a fill colour, a stroke colour, a colour for 
+the fill of each point, and a colour for the stroke of each point. We 
+also have an array of data values.</p>
+				
+				<h2 id="radarChart-chartOptions">Chart options</h2>
+				<pre data-type="javascript"><code><span class="typ"><span class="typ">Radar</span></span><span class="pun"><span class="pun">.</span></span><span class="pln"><span class="pln">defaults </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+				
+	</span></span><span class="com"><span class="com">//Boolean - If we show the scale above the chart data			</span></span><span class="pln"><span class="pln">
+	scaleOverlay </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - If we want to override with a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleOverride </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//** Required if scaleOverride is true **</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The number of steps in a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The value jump in the hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleStepWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The centre starting value</span></span><span class="pln"><span class="pln">
+	scaleStartValue </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show lines for each scale point</span></span><span class="pln"><span class="pln">
+	scaleShowLine </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//String - Colour of the scale line	</span></span><span class="pln"><span class="pln">
+	scaleLineColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(0,0,0,.1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of the scale line	</span></span><span class="pln"><span class="pln">
+	scaleLineWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show labels on the scale	</span></span><span class="pln"><span class="pln">
+	scaleShowLabels </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Interpolated JS string - can access value</span></span><span class="pln"><span class="pln">
+	scaleLabel </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"&lt;%=value%&gt;"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font declaration for the scale label</span></span><span class="pln"><span class="pln">
+	scaleFontFamily </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"'Arial'"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Scale label font size in pixels	</span></span><span class="pln"><span class="pln">
+	scaleFontSize </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">12</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font weight style	</span></span><span class="pln"><span class="pln">
+	scaleFontStyle </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"normal"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font colour	</span></span><span class="pln"><span class="pln">
+	scaleFontColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#666"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Show a backdrop to the scale label</span></span><span class="pln"><span class="pln">
+	scaleShowLabelBackdrop </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - The colour of the label backdrop	</span></span><span class="pln"><span class="pln">
+	scaleBackdropColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(255,255,255,0.75)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The backdrop padding above &amp; below the label in pixels</span></span><span class="pln"><span class="pln">
+	scaleBackdropPaddingY </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The backdrop padding to the side of the label in pixels	</span></span><span class="pln"><span class="pln">
+	scaleBackdropPaddingX </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether we show the angle lines out of the radar</span></span><span class="pln"><span class="pln">
+	angleShowLineOut </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Colour of the angle line</span></span><span class="pln"><span class="pln">
+	angleLineColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(0,0,0,.1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of the angle line</span></span><span class="pln"><span class="pln">
+	angleLineWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">			
+	
+	</span></span><span class="com"><span class="com">//String - Point label font declaration</span></span><span class="pln"><span class="pln">
+	pointLabelFontFamily </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"'Arial'"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Point label font weight</span></span><span class="pln"><span class="pln">
+	pointLabelFontStyle </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"normal"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Point label font size in pixels	</span></span><span class="pln"><span class="pln">
+	pointLabelFontSize </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">12</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Point label font colour	</span></span><span class="pln"><span class="pln">
+	pointLabelFontColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#666"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show a dot for each point</span></span><span class="pln"><span class="pln">
+	pointDot </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Radius of each point dot in pixels</span></span><span class="pln"><span class="pln">
+	pointDotRadius </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">3</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of point dot stroke</span></span><span class="pln"><span class="pln">
+	pointDotStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to show a stroke for datasets</span></span><span class="pln"><span class="pln">
+	datasetStroke </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Pixel width of dataset stroke</span></span><span class="pln"><span class="pln">
+	datasetStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to fill the dataset with a colour</span></span><span class="pln"><span class="pln">
+	datasetFill </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to animate the chart</span></span><span class="pln"><span class="pln">
+	animation </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Number - Number of animation steps</span></span><span class="pln"><span class="pln">
+	animationSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">60</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Animation easing effect</span></span><span class="pln"><span class="pln">
+	animationEasing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"easeOutQuart"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Function - Fires when the animation is complete</span></span><span class="pln"><span class="pln">
+	onAnimationComplete </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pln"><span class="pln">
+	
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+			</article>			
+			
+			<article id="polarAreaChart">
+				<h1>Polar area chart</h1>
+				<h2 id="polarAreaChart-introduction">Introduction</h2>
+				<p>Polar area charts are similar to pie charts, but each segment has
+ the same angle - the radius of the segment differs depending on the 
+value.</p>
+				<p>This type of chart is often useful when we want to show a 
+comparison data similar to a pie chart, but also show a scale of values 
+for context.</p>
+				<h2 id="polarAreaChart-exampleUsage">Example usage</h2>
+				<canvas style="width: 300px; height: 300px;" id="polarArea" data-type="PolarArea" width="300" height="300"></canvas>
+				<pre data-type="javascript"><code><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">PolarArea</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">options</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<h2 id="polarAreaChart-dataStructure">Data structure</h2>
+				<pre data-type="javascript"><code data-for="polarArea"><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> data </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">30</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#D97041"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">90</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#C7604C"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">24</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#21323D"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">58</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#9D9B7F"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">82</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#7D4F6D"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">8</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#584A5E"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">}</span></span><span class="pln"><span class="pln">
+</span></span><span class="pun"><span class="pun">]</span></span></code></pre>
+				<p>As you can see, for the chart data you pass in an array of objects, with a value and a colour. The <code><span class="pln">value</span></code> attribute should be a number, while the <code><span class="pln">color</span></code> attribute should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.</p>
+				<h2 id="polarAreaChart-chartOptions">Chart options</h2>
+				<p>These are the default chart options. By passing in an object with
+ any of these attributes, Chart.js will merge these objects and the 
+graph accordingly. Explanations of each option are commented in the code
+ below.</p>
+				<pre data-type="javascript"><code><span class="typ"><span class="typ">PolarArea</span></span><span class="pun"><span class="pun">.</span></span><span class="pln"><span class="pln">defaults </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+				
+	</span></span><span class="com"><span class="com">//Boolean - Whether we show the scale above or below the chart segments</span></span><span class="pln"><span class="pln">
+	scaleOverlay </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - If we want to override with a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleOverride </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//** Required if scaleOverride is true **</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The number of steps in a hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The value jump in the hard coded scale</span></span><span class="pln"><span class="pln">
+	scaleStepWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Number - The centre starting value</span></span><span class="pln"><span class="pln">
+	scaleStartValue </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Show line for each value in the scale</span></span><span class="pln"><span class="pln">
+	scaleShowLine </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - The colour of the scale line</span></span><span class="pln"><span class="pln">
+	scaleLineColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(0,0,0,.1)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The width of the line - in pixels</span></span><span class="pln"><span class="pln">
+	scaleLineWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">1</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - whether we should show text labels</span></span><span class="pln"><span class="pln">
+	scaleShowLabels </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Interpolated JS string - can access value</span></span><span class="pln"><span class="pln">
+	scaleLabel </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"&lt;%=value%&gt;"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font declaration for the scale label</span></span><span class="pln"><span class="pln">
+	scaleFontFamily </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"'Arial'"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Scale label font size in pixels	</span></span><span class="pln"><span class="pln">
+	scaleFontSize </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">12</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font weight style	</span></span><span class="pln"><span class="pln">
+	scaleFontStyle </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"normal"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Scale label font colour	</span></span><span class="pln"><span class="pln">
+	scaleFontColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#666"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Show a backdrop to the scale label</span></span><span class="pln"><span class="pln">
+	scaleShowLabelBackdrop </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - The colour of the label backdrop	</span></span><span class="pln"><span class="pln">
+	scaleBackdropColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"rgba(255,255,255,0.75)"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The backdrop padding above &amp; below the label in pixels</span></span><span class="pln"><span class="pln">
+	scaleBackdropPaddingY </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The backdrop padding to the side of the label in pixels	</span></span><span class="pln"><span class="pln">
+	scaleBackdropPaddingX </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Boolean - Stroke a line around each segment in the chart</span></span><span class="pln"><span class="pln">
+	segmentShowStroke </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - The colour of the stroke on each segement.</span></span><span class="pln"><span class="pln">
+	segmentStrokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#fff"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The width of the stroke value in pixels	</span></span><span class="pln"><span class="pln">
+	segmentStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to animate the chart or not</span></span><span class="pln"><span class="pln">
+	animation </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Amount of animation steps</span></span><span class="pln"><span class="pln">
+	animationSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Animation easing effect.</span></span><span class="pln"><span class="pln">
+	animationEasing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"easeOutBounce"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Boolean - Whether to animate the rotation of the chart</span></span><span class="pln"><span class="pln">
+	animateRotate </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether to animate scaling the chart from the centre</span></span><span class="pln"><span class="pln">
+	animateScale </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Function - This will fire when the animation of the chart is complete.</span></span><span class="pln"><span class="pln">
+	onAnimationComplete </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pln"><span class="pln">
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+			</article>
+			<article id="pieChart">
+				<h1>Pie chart</h1>
+				<h2 id="pieChart-introduction">Introduction</h2>
+				<p>Pie charts are probably the most commonly used chart there are. 
+They are divided into segments, the arc of each segment shows a the 
+proportional value of each piece of data.</p>
+				<p>They are excellent at showing the relational proportions between data.</p>
+				<h2 id="pieChart-exampleUsage">Example usage</h2>
+				<canvas style="width: 400px; height: 400px;" id="pie" data-type="Pie" width="400" height="400"></canvas>
+				<pre data-type="javascript"><code><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">Pie</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">options</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<h2 id="pieChart-dataStructure">Data structure</h2>
+				<pre data-type="javascript"><code data-for="pie"><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> data </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">30</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="str"><span class="str">"#F38630"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">50</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#E0E4CC"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#69D2E7"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">}</span></span><span class="pln"><span class="pln">			
+</span></span><span class="pun"><span class="pun">]</span></span></code></pre>
+				<p>For a pie chart, you must pass in an array of objects with a <code><span class="pln">value</span></code> and a <code><span class="pln">color</span></code> property. The <code><span class="pln">value</span></code> attribute should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each. The <code><span class="pln">color</span></code> attribute should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.</p>
+				<h2 id="pieChart-chartOptions">Chart options</h2>
+				<p>These are the default options for the Pie chart. Pass in an object with any of these attributes to override them.
+				</p><pre data-type="javascript"><code><span class="typ"><span class="typ">Pie</span></span><span class="pun"><span class="pun">.</span></span><span class="pln"><span class="pln">defaults </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Boolean - Whether we should show a stroke on each segment</span></span><span class="pln"><span class="pln">
+	segmentShowStroke </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - The colour of each segment stroke</span></span><span class="pln"><span class="pln">
+	segmentStrokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#fff"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The width of each segment stroke</span></span><span class="pln"><span class="pln">
+	segmentStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether we should animate the chart	</span></span><span class="pln"><span class="pln">
+	animation </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Amount of animation steps</span></span><span class="pln"><span class="pln">
+	animationSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Animation easing effect</span></span><span class="pln"><span class="pln">
+	animationEasing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"easeOutBounce"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether we animate the rotation of the Pie</span></span><span class="pln"><span class="pln">
+	animateRotate </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Boolean - Whether we animate scaling the Pie from the centre</span></span><span class="pln"><span class="pln">
+	animateScale </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Function - Will fire on animation completion.</span></span><span class="pln"><span class="pln">
+	onAnimationComplete </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pln"><span class="pln">
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+			</article>
+			<article id="doughnutChart">
+				<h1>Doughnut chart</h1>
+				<h2 id="doughnutChart-introduction">Introduction</h2>
+				<p>Doughnut charts are similar to pie charts, however they have the 
+centre cut out, and are therefore shaped more like a doughnut than a 
+pie!</p>
+				<p>They are aso excellent at showing the relational proportions between data.</p>
+				<h2 id="doughnutChart-exampleUsage">Example usage</h2>
+				<canvas style="width: 400px; height: 400px;" id="doughnut" data-type="Doughnut" width="400" height="400"></canvas>
+				<pre data-type="javascript"><code><span class="kwd"><span class="kwd">new</span></span><span class="pln"><span class="pln"> </span></span><span class="typ"><span class="typ">Chart</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">ctx</span></span><span class="pun"><span class="pun">).</span></span><span class="typ"><span class="typ">Doughnut</span></span><span class="pun"><span class="pun">(</span></span><span class="pln"><span class="pln">data</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">options</span></span><span class="pun"><span class="pun">);</span></span></code></pre>
+				<h2 id="doughnutChart-dataStructure">Data structure</h2>
+				<pre data-type="javascript"><code data-for="doughnut"><span class="kwd"><span class="kwd">var</span></span><span class="pln"><span class="pln"> data </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">[</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value</span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">30</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color</span></span><span class="pun"><span class="pun">:</span></span><span class="str"><span class="str">"#F7464A"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">50</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#E2EAE9"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#D4CCC5"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">40</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#949FB1"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">},</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+		value </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">120</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+		color </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#4D5360"</span></span><span class="pln"><span class="pln">
+	</span></span><span class="pun"><span class="pun">}</span></span><span class="pln"><span class="pln">
+
+</span></span><span class="pun"><span class="pun">]</span></span></code></pre>
+				<p>For a doughnut chart, you must pass in an array of objects with a <code><span class="pln">value</span></code> and a <code><span class="pln">color</span></code> property. The <code><span class="pln">value</span></code> attribute should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each. The <code><span class="pln">color</span></code> attribute should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.</p>
+				<h2 id="doughnutChart-chartOptions">Chart options</h2>
+				<p>These are the default options for the doughnut chart. Pass in an object with any of these attributes to override them.
+				</p><pre data-type="javascript"><code><span class="typ"><span class="typ">Doughnut</span></span><span class="pun"><span class="pun">.</span></span><span class="pln"><span class="pln">defaults </span></span><span class="pun"><span class="pun">=</span></span><span class="pln"><span class="pln"> </span></span><span class="pun"><span class="pun">{</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">//Boolean - Whether we should show a stroke on each segment</span></span><span class="pln"><span class="pln">
+	segmentShowStroke </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - The colour of each segment stroke</span></span><span class="pln"><span class="pln">
+	segmentStrokeColor </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"#fff"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - The width of each segment stroke</span></span><span class="pln"><span class="pln">
+	segmentStrokeWidth </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">2</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//The percentage of the chart that we cut out of the middle.</span></span><span class="pln"><span class="pln">
+	percentageInnerCutout </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">50</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether we should animate the chart	</span></span><span class="pln"><span class="pln">
+	animation </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Number - Amount of animation steps</span></span><span class="pln"><span class="pln">
+	animationSteps </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="lit"><span class="lit">100</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//String - Animation easing effect</span></span><span class="pln"><span class="pln">
+	animationEasing </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="str"><span class="str">"easeOutBounce"</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Boolean - Whether we animate the rotation of the Doughnut</span></span><span class="pln"><span class="pln">
+	animateRotate </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">true</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+
+	</span></span><span class="com"><span class="com">//Boolean - Whether we animate scaling the Doughnut from the centre</span></span><span class="pln"><span class="pln">
+	animateScale </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">false</span></span><span class="pun"><span class="pun">,</span></span><span class="pln"><span class="pln">
+	
+	</span></span><span class="com"><span class="com">//Function - Will fire on animation completion.</span></span><span class="pln"><span class="pln">
+	onAnimationComplete </span></span><span class="pun"><span class="pun">:</span></span><span class="pln"><span class="pln"> </span></span><span class="kwd"><span class="kwd">null</span></span><span class="pln"><span class="pln">
+</span></span><span class="pun"><span class="pun">}</span></span></code></pre>
+			</article>
+			<article id="generalIssues">
+				<h1>General issues</h1>
+				<h2 id="generalIssues-chartInteractivity">Chart interactivity</h2>
+				<p>If you are looking to add interaction as a layer to charts, Chart.js is <strong>not the library for you</strong>.
+ A better option would be using SVG, as this will let you attach event 
+listeners to any of the elements in the chart, as these are all DOM 
+nodes.</p>
+				<p>Chart.js uses the canvas element, which is a single DOM node, 
+similar in characteristics to a static image. This does mean that it has
+ a wider scope for compatibility, and less memory implications than SVG 
+based charting solutions. The canvas element also allows for saving the 
+contents as a base 64 string, allowing saving the chart as an image. </p>
+				<p>In SVG, all of the lines, data points and everything you see is a
+ DOM node. As a result of this, complex charts with a lot of 
+intricacies, or many charts on the page will often see dips in 
+performance when scrolling or generating the chart, especially when 
+there are multiple on the page. SVG also has relatively poor mobile 
+support, with Android not supporting SVG at all before version 3.0, and 
+iOS before 5.0. (<a href="http://caniuse.com/svg-html5" target="_blank">caniuse.com/svg-html5</a>).</p>
+				<h2 id="generalIssues-browserSupport">Browser support</h2>
+				<p>Browser support for the canvas element is available in all modern &amp; major mobile browsers (<a href="http://caniuse.com/canvas" target="_blank">caniuse.com/canvas</a>).</p>
+				<p>For IE8 &amp; below, I would recommend using the polyfill ExplorerCanvas - available at <a href="https://code.google.com/p/explorercanvas/" target="_blank">https://code.google.com/p/explorercanvas/</a>. It falls back to Internet explorer's format VML when canvas support is not available. Example use:</p>
+				<pre data-type="html"><code><span class="tag"><span class="tag">&lt;head&gt;</span></span><span class="pln"><span class="pln">
+	</span></span><span class="com"><span class="com">&lt;!--[if lte IE 8]&gt;
+		&lt;script src="excanvas.js"&gt;&lt;/script&gt;
+	&lt;![endif]--&gt;</span></span><span class="pln"><span class="pln">
+</span></span><span class="tag"><span class="tag">&lt;/head&gt;</span></span></code></pre>
+				<p>Usually I would recommend feature detection to choose whether or 
+not to load a polyfill, rather than IE conditional comments, however in 
+this case, VML is a Microsoft proprietary format, so it will only work 
+in IE.</p>
+				<p>Some important points to note in my experience using ExplorerCanvas as a fallback.</p>
+				<ul>
+					<li>Initialise charts on load rather than DOMContentReady when 
+using the library, as sometimes a race condition will occur, and it will
+ result in an error when trying to get the 2d context of a canvas.</li>
+					<li>New VML DOM elements are being created for each animation frame
+ and there is no hardware acceleration. As a result animation is usually
+ slow and jerky, with flashing text. It is a good idea to dynamically 
+turn off animation based on canvas support. I recommend using the 
+excellent <a href="http://modernizr.com/" targer="_blank">Modernizr</a> to do this.</li>
+					<li>When declaring fonts, the library explorercanvas requires the 
+font name to be in single quotes inside the string. For example, instead
+ of your scaleFontFamily property being simply "Arial", explorercanvas 
+support, use "'Arial'" instead. Chart.js does this for default values.</li>
+					
+				</ul>
+				<h2 id="generalIssues-bugs&amp;Issues">Bugs &amp; issues</h2>
+				<p>Please report these on the Github page - at <a href="https://github.com/nnnick/Chart.js" target="_blank">github.com/nnnick/Chart.js</a>.</p>
+				<p>New contributions to the library are welcome.</p>
+				<h2 id="generalIssues-license">License</h2>
+				<p>Chart.js is open source and available under the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>.</p>
+			</article>
+		</div>
+	</div>
+	
+	<script>
+	$(document).ready(function(){
+	
+		var $nav = $("nav dl");
+		
+		$("article").each(function(){
+			var $el = $(this);
+			var $h1 = $el.find("h1");
+			var sectionTitle = $h1.html();
+			var articleId = $el.attr("id");
+			var $dt = $("<dt><a href=\"#"+articleId +"\">"+sectionTitle+"</a></dt>");
+			
+			$dt.find("a").on("click",function(e){
+				e.preventDefault();
+				$('html,body').animate({scrollTop: $h1.offset().top},400);
+			});
+			
+			$nav.append($dt);
+			
+			var $subtitles = $el.find("h2");
+			
+			$subtitles.each(function(){
+				var $h2 = $(this);
+				var title = $h2.text();
+				var newID = articleId + "-" +camelCase(title);
+				$h2.attr("id",newID);
+				var $dd = $("<dd><a href=\"#" +newID + "\">" + title + "</a></dd>");
+				
+				$dd.find("a").on("click",function(e){
+					e.preventDefault();
+					$('html,body').animate({scrollTop: $h2.offset().top},400);
+				})
+				$nav.append($dd);
+				
+			});
+			
+			var $articles = $el.find("article");
+			
+		});	
+		
+		$("canvas").each(function(){
+			var $canvas = $(this);
+			var ctx = this.getContext("2d");
+			
+			
+			
+			eval($("code[data-for='" + $canvas.attr("id") + "']").text());
+			
+			
+			var evalString = "new Chart(ctx)." + $canvas.data("type") + "(data);";
+			
+			eval(evalString);
+						
+		});
+		prettyPrint();			
+		
+		function camelCase(str){			
+			var splitString = str.split(" ");
+			
+			var returnedCamel = splitString[0].toLowerCase();
+			
+			for (var i=1; i<splitString.length; i++){
+				returnedCamel += splitString[i].charAt(0).toUpperCase() + splitString[i].substring(1).toLowerCase();
+			}
+			
+			return returnedCamel;
+			
+		} 
+	});
+	</script>
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-28909194-3']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+
+</body></html>

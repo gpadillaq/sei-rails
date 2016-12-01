@@ -1,0 +1,23 @@
+<li class="filter">
+  <% unless filter_type == :check_box %>
+    <div class="small-12 column">
+      <%= f.label field, label %>
+    </div>
+  <% end %>
+  <div class="small-12 column">
+    <% case filter_type %>
+    <% when :select %>
+      <%= f.select field, collection %>
+    <% when :select_tag %>
+      <%= select_tag "q[#{field}]", options_for_select(collection, filter_value), class: clases %>
+    <% when :date_range %>
+      <%= render 'filters/date_range_filter', f: f, field: field %>
+    <% when :custom_search_filter %>
+      <%= render 'filters/custom_search_filter', field: field, filter_value: filter_value, predicate: filter_predicate %>
+    <% when :check_box %>
+      <%= render 'filters/check_box_filter', f: f, field: field, label: label, filter_value: filter_value %>
+    <% else %>
+      <%= f.search_field field %>
+    <%end %>
+  </div>
+</li>

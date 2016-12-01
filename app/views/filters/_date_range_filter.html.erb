@@ -1,0 +1,12 @@
+<%
+  date_from_field = field.to_s + "_gteq"
+  date_to_field = field.to_s + "_lteq"
+%>
+<div class="row">
+  <div class="small-6 column">
+    <%= f.search_field date_from_field, class: "date-picker" %>
+  </div>
+  <div class="small-6 column">
+    <%= f.search_field date_to_field, class: "date-picker" %>
+  </div>
+</div>

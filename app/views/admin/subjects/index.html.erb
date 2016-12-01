@@ -1,5 +1,18 @@
 <div class="small-12 column">
-  <h1>Asignaturas</h1>
+  <div class="full-with">
+    <div class="small-8 column">
+      <h1>Asignaturas</h1>
+    </div>
+    <div class="small-4 column">
+      <button type="button" name="button" id="import-subject" class="button">Importar</button>
+    </div>
+    <div class="row scopes">
+      <div class="small-12 column">
+        <%= scope :all, "Todos" %>
+        <%#= render partial: "admin/survey_comments/search_form", layout: "layouts/search_form" %>
+      </div>
+    </div>
+  </div>
 
   <table class="table" border="0" cellpadding="0" cellspacing="0">
     <thead>

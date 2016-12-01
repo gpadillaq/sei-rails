@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025172256) do
+ActiveRecord::Schema.define(version: 20161121010553) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -25,8 +28,8 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "answer_types", force: :cascade do |t|
@@ -42,8 +45,8 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.integer  "answer_type_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.index ["answer_type_id"], name: "index_answers_on_answer_type_id"
-    t.index ["user_type_id"], name: "index_answers_on_user_type_id"
+    t.index ["answer_type_id"], name: "index_answers_on_answer_type_id", using: :btree
+    t.index ["user_type_id"], name: "index_answers_on_user_type_id", using: :btree
   end
 
   create_table "groups", force: :cascade do |t|
@@ -78,8 +81,8 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.integer  "question_type_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["question_type_id"], name: "index_questions_on_question_type_id"
-    t.index ["user_type_id"], name: "index_questions_on_user_type_id"
+    t.index ["question_type_id"], name: "index_questions_on_question_type_id", using: :btree
+    t.index ["user_type_id"], name: "index_questions_on_user_type_id", using: :btree
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -94,7 +97,7 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.text     "descripcion"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.index ["user_survey_id"], name: "index_survey_comments_on_user_survey_id"
+    t.index ["user_survey_id"], name: "index_survey_comments_on_user_survey_id", using: :btree
   end
 
   create_table "survey_results", force: :cascade do |t|
@@ -103,9 +106,9 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.integer  "answer_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.index ["answer_id"], name: "index_survey_results_on_answer_id"
-    t.index ["question_id"], name: "index_survey_results_on_question_id"
-    t.index ["user_survey_id"], name: "index_survey_results_on_user_survey_id"
+    t.index ["answer_id"], name: "index_survey_results_on_answer_id", using: :btree
+    t.index ["question_id"], name: "index_survey_results_on_question_id", using: :btree
+    t.index ["user_survey_id"], name: "index_survey_results_on_user_survey_id", using: :btree
   end
 
   create_table "surveys", force: :cascade do |t|
@@ -126,12 +129,14 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.boolean  "activa"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["group_id"], name: "index_user_surveys_on_group_id"
-    t.index ["interval_id"], name: "index_user_surveys_on_interval_id"
-    t.index ["level_id"], name: "index_user_surveys_on_level_id"
-    t.index ["subject_id"], name: "index_user_surveys_on_subject_id"
-    t.index ["user_id"], name: "index_user_surveys_on_user_id"
-    t.index ["user_type_id"], name: "index_user_surveys_on_user_type_id"
+    t.integer  "survey_id"
+    t.index ["group_id"], name: "index_user_surveys_on_group_id", using: :btree
+    t.index ["interval_id"], name: "index_user_surveys_on_interval_id", using: :btree
+    t.index ["level_id"], name: "index_user_surveys_on_level_id", using: :btree
+    t.index ["subject_id"], name: "index_user_surveys_on_subject_id", using: :btree
+    t.index ["survey_id"], name: "index_user_surveys_on_survey_id", using: :btree
+    t.index ["user_id"], name: "index_user_surveys_on_user_id", using: :btree
+    t.index ["user_type_id"], name: "index_user_surveys_on_user_type_id", using: :btree
   end
 
   create_table "user_types", force: :cascade do |t|
@@ -155,8 +160,23 @@ ActiveRecord::Schema.define(version: 20161025172256) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "answers", "answer_types"
+  add_foreign_key "answers", "user_types"
+  add_foreign_key "questions", "question_types"
+  add_foreign_key "questions", "user_types"
+  add_foreign_key "survey_comments", "user_surveys"
+  add_foreign_key "survey_results", "answers"
+  add_foreign_key "survey_results", "questions"
+  add_foreign_key "survey_results", "user_surveys"
+  add_foreign_key "user_surveys", "groups"
+  add_foreign_key "user_surveys", "intervals"
+  add_foreign_key "user_surveys", "levels"
+  add_foreign_key "user_surveys", "subjects"
+  add_foreign_key "user_surveys", "surveys"
+  add_foreign_key "user_surveys", "user_types"
+  add_foreign_key "user_surveys", "users"
 end

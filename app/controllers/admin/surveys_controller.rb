@@ -29,7 +29,7 @@ class Admin::SurveysController < Admin::BaseController
 
     respond_to do |format|
       if @survey.save
-        format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
+        format.html { redirect_to admin_survey_path @survey, notice: 'Survey was successfully created.' }
         format.json { render :show, status: :created, location: @survey }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::SurveysController < Admin::BaseController
   def update
     respond_to do |format|
       if @survey.update(survey_params)
-        format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
+        format.html { redirect_to admin_survey_path @survey, notice: 'Survey was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey }
       else
         format.html { render :edit }
@@ -57,8 +57,25 @@ class Admin::SurveysController < Admin::BaseController
   def destroy
     @survey.destroy
     respond_to do |format|
-      format.html { redirect_to surveys_url, notice: 'Survey was successfully destroyed.' }
+      format.html { redirect_to admin_surveys_url, notice: 'Survey was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def import
+    begin
+      byebug
+      if params[:file].present?
+        @survey = Survey.find(params[:id])
+        if @survey.import(params[:file])
+          flash[:notice] = 'Archivo Importado Exitosamente'
+        end
+      else
+        flash[:notice] = 'Por favor Seleccione un Archivo'
+      end
+      render js: "window.location = '#{admin_users_path}'"
+    rescue ArgumentError => e
+      render json: {msg: e.message}, status: 400
     end
   end
 

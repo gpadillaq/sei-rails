@@ -1,0 +1,42 @@
+# empresa = Empresa.first
+@column_name = 'A'.upto('Z').to_a
+wb.styles do |s|
+  @header_cell = s.add_style(b: true, sz: 14, alignment: { horizontal: :center, vertical: :center})
+  @title_cell = s.add_style(b: true, sz: 8, bg_color: '4d4d50' , fg_color: 'ffffff',
+                           alignment: { horizontal: :center, vertical: :center}, border: { style: :thin, color: '00'})
+  @sub_title_cell = s.add_style(b: true, sz: 8, border: { style: :thin, color: '00'}, alignment: { horizontal: :left})
+  @title_cell_left = s.add_style(b: true, sz: 8, bg_color: '4d4d50' , fg_color: 'ffffff',
+                            alignment: { horizontal: :left, vertical: :center}, border: { style: :thin, color: '00'})
+  @monto_cell = s.add_style(sz: 8, border: { style: :thin, color: '00'}, alignment: { horizontal: :right},  num_fmt: 39)
+  @default_cell = s.add_style(sz: 8, border: { style: :thin, color: '00'}, alignment: { horizontal: :left, wrap_text: :true})
+  @string_center_cell = s.add_style(sz: 8, border: { style: :thin, color: '00'}, alignment: { horizontal: :center})
+  @date_cell = string_center_cell = s.add_style(sz: 8, border: { style: :thin, color: '00'}, alignment: { horizontal: :center}, format_code: 'DD-MM-YYYY')
+  @total_cell = s.add_style(b: true, sz: 12, border: { style: :thin, color: '00'},  num_fmt: 39)
+end
+# if empresa.present?
+#   logo_file_name = Empresa.pluck(:logo)[0].to_s.gsub("/assets/admin/", "")
+#   no_logo = logo_file_name.blank?
+#   if !no_logo
+#     logo_path =  Rails.root.to_s + "/app/assets/images/admin/" + logo_file_name
+#   else
+#     logo_path =  Rails.root.to_s + "/app/assets/images/admin/logo_agssa.png"
+#   end
+#   if File.file?(logo_path)
+#     img = File.expand_path(logo_path, __FILE__)
+#     sheet.add_image(image_src: img, noSelect: true, noMove: true) do |image|
+#       image.width = 100
+#       image.height = 50
+#       image.start_at 0, 0
+#     end
+#   end
+#   sheet.add_row([empresa.empresa_nombre], style: @header_cell)
+#   index_row = sheet.rows.last.index + 1
+#   sheet.merge_cells("A#{index_row}:#{@column_name[merge]}#{index_row}")
+#   sheet.add_row([empresa.numero_ruc], style: @header_cell)
+#   index_row = sheet.rows.last.index + 1
+#   sheet.merge_cells("A#{index_row}:#{@column_name[merge]}#{index_row}")
+#   sheet.add_row([empresa.direccion], style: @header_cell)
+#   index_row = sheet.rows.last.index + 1
+#   sheet.merge_cells("A#{index_row}:#{@column_name[merge]}#{index_row}")
+#   sheet.add_row([])
+# end
