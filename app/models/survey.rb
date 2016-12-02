@@ -69,7 +69,7 @@ class Survey < ApplicationRecord
   end
 
   def self.user_surveys_active(current_user)
-    survey = Survey.where(active: true).where('inicio >= ? and fin <= ?', Date.today, Date.today).first
+    survey = Survey.where(active: true).where('inicio >= ? or fin <= ?', Date.today, Date.today).first
     user_survey_available = survey.user_surveys.where(user_id: current_user.id)
     user_type = user_survey_available.first.user_type
     plantilla = PLATILLAS[user_type.id]
