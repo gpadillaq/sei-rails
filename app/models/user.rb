@@ -47,7 +47,6 @@ class User < ApplicationRecord
           begin
             @user.save!
           rescue => ex
-            byebug
             logger.error '************************************************************************************************'
             logger.error ex.message
             logger.error ex.backtrace.join("\n")

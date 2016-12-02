@@ -4,7 +4,8 @@ class Admin::SubjectsController < Admin::BaseController
   # GET /subjects
   # GET /subjects.json
   def index
-    @subjects = Subject.all
+    @q = Subject.ransack(params[:q])
+    @subjects = @q.result.page(params[:page])
   end
 
   # GET /subjects/1

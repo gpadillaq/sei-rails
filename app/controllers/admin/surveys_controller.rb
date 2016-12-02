@@ -5,7 +5,8 @@ class Admin::SurveysController < Admin::BaseController
   # GET /surveys
   # GET /surveys.json
   def index
-    @surveys = Survey.all
+    @q = Survey.ransack(params[:q])
+    @surveys = @q.result.page(params[:page])
   end
 
   # GET /surveys/1

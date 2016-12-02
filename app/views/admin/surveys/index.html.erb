@@ -38,7 +38,13 @@
       <% end %>
     </tbody>
   </table>
+  <div class="row">
+    <div class="small-12 column">
+      <%= paginate @surveys %>
+      <%= page_entries_info  @surveys %>
+    </div>
+  </div>
+  <br>
 
-<br>
-
-<%= link_to 'Crear Evaluación', new_admin_survey_path, class: 'button' %>
+  <%= link_to 'Crear Evaluación', new_admin_survey_path, class: 'button' %>
+</div>

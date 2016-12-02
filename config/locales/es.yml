@@ -1,0 +1,517 @@
+#Encoding: UTF-8
+es:
+  'true': "Sí"
+  'false': "No"
+  'You are not authorized to access this page': "Usuario no autorizado para realizar esta operación."
+  created_at: "Fecha de Creación"
+  views:
+    pagination:
+      first: "&laquo; Inicio"
+      last: "Último &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No se encontraron %{entry_name}"
+          one: "Mostrando <b>1</b> %{entry_name}"
+          other: "Mostrando <b>todas %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> en total"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Registro Inválido"
+        invalid_date: "No es una fecha válida"
+        invalid_time: "No es una hora válida"
+        invalid_datetime: "No es una Fecha / Hora válida"
+        is_at: "Debe ser: %{restriction}"
+        before: "Debe ser anterior a: %{restriction}"
+        on_or_before: "Debe ser menor o igual a: %{restriction}"
+        after: "Debe ser despues de: %{restriction}"
+        on_or_after: "Debe ser mayor o igual: %{restriction}"
+      models:
+        clientes:
+          blank: "Campo requerido"
+        carrera:
+          blank: "No puede estar en blanco"
+        facultad:
+          blank:  "No puede estar en blanco"
+        turno:
+          blank: "No puede estar en blanco"
+        sucursal_sede:
+          blank: "No puede estar en blanco"
+        admin_user:
+          attributes:
+            email:
+              not_found: "no corresponde a ningún usuario activo o no es válido."
+        comprobante:
+          blank: "Campo requerido"
+        detalle_comprobante:
+          blank: "Campo requerido"
+        retencion:
+          blank: "Campo requerido"
+        servicio:
+          blank: "Campo requerido"
+        cotizacion:
+          blank: "Campo requerido"
+        tipo_cuenta:
+          attributes:
+            tipo_cuenta_nombre:
+              blank: "Nombre del tipo de cuenta requerido"
+        cuenta_para_registrar:
+          attributes:
+            nombre_opcion:
+              blank: "Nombre de la opción requerido"
+        categoria_cuenta_contable:
+          attributes:
+            categoria_cuenta_contable:
+              blank: "Categoría de cuenta requerido"
+        tipo_tasa_cambio:
+          attributes:
+            tipo_tasa_cambio:
+              blank: "Tipo de tasa de cambio requerida"
+        tipo_moneda:
+          attributes:
+            tipo_moneda_nombre:
+              blank: "Nombre de unidad monetaria requerido"
+            tipo_moneda_simbolo:
+              blank: "Símbolo de unidad monetaria requerido"
+        concepto_breve_comprobante:
+          attributes:
+            concepto_breve_descripcion:
+              blank: "Descripción de concepto requerido"
+        clase_servicio:
+          attributes:
+            clase_servicio:
+              blank: "Clase de servicio es requerido"
+        tasa_cambio_fija:
+          attributes:
+            fecha_tasa_cambio_fija:
+              blank: "Fecha es requerida"
+            tasa_cambio_fija:
+              blank: "Tasa es requerida"
+        tasa_cambio_oficial:
+          attributes:
+            fecha_tasa_cambio_oficial:
+              blank: "Fecha es requerida"
+            tasa_cambio_oficial:
+              blank: "Tasa es requerida"
+        centro_de_costo:
+          attributes:
+            nombre:
+              blank: "No puede estar en blanco"
+        banco:
+          attributes:
+            banco_nombre:
+              taken: "Ya existe el banco: %{value}"
+              blank: "Nombre de Banco requerido"
+            siglas:
+              taken: "Ya existen las siglas: %{value}"
+              blank: "Siglas de Banco requerido"
+        cuenta_bancaria:
+          attributes:
+            numero_cuenta:
+              blank: "Numero de cuenta bancaria requerido"
+            tipo_moneda_id:
+              blank: "Tipo de moneda requerido"
+            numero_cheque:
+              not_a_number: "No es un número válido"
+            saldo_minimo:
+              blank: "Saldo minimo de la cuenta bancaria es requerido"
+              not_a_number: "No es un número válido"
+        empresa:
+          attributes:
+            empresa_nombre:
+              blank: "Nombre de Empresa requerido"
+              taken: "El nombre de la Empresa %{value} ya existe"
+            numero_ruc:
+              blank: "Numero ruc de Empresa es requerido"
+            porcentaje_iva:
+              blank: "Procentaje Iva es requerido"
+              not_a_number: "No es un número válido"
+            porcentaje_ir:
+              blank: "Procentaje IR es requerido"
+              not_a_number: "No es un número válido"
+            porcentaje_impuesto_anual:
+              blank: "Procentaje Impuesto Anual es requerido"
+              not_a_number: "No es un número válido"
+            cuenta_debito_iva:
+              blank: "Cuenta Debito IVA es requerido"
+            cuenta_credito_iva:
+              blank: "Cuenta Credito IVA es requerido"
+            cuenta_ingresos_financieros:
+              blank: "Cuenta de Ingresos es requerida"
+            cuenta_gastos_financieros:
+              blank: "Cuenta de Gastos es requerida"
+            cuenta_por_cobrar:
+              blank: "Cuenta por Cobrar es requerida"
+            cuenta_por_pagar:
+              blank: "Cuenta por Pagar es requerida"
+            tipo_moneda_id:
+              blank: "Tipo de Moneda es requerido"
+            tipo_cambio_facturacion:
+              blank: "Tipo Cambio Facturacion es requerido"
+            tipo_cambio_recibo:
+              blank: "Tipo Cambio Recibo es requerido"
+            tipo_cambio_nota_dc:
+              blank: "Tipo Cambio Nota DC es requerido"
+            tipo_cambio_comprobante_diario:
+              blank: "Tipo Cambio Comprobante Diario es requerido"
+            tipo_cambio_comprobante_pago:
+              blank: "Tipo Cambio Comprobante Pago es requerido"
+            cargo_autoriza:
+              blank: "Cargo de responsable que autoriza requerido"
+            nombre_autoriza:
+              blank: "Nombre de responsable que autoriza requerido"
+            nombre_elabora:
+              blank: "Nombre de responsable que elabora requerido"
+            cargo_elabora:
+              blank: "Cargo de respnsable que elabora requerido"
+            nombre_revisa:
+              blank: "Nombre de responsable que revisa requerido"
+            cargo_revisa:
+              blank: "Cargo de responsable que revisa requerido"
+            numero_telefono:
+              blank: "Numero de teléfono de la empresa requerido"
+        cuenta_contable:
+          attributes:
+            categoria_cuenta_contable_id:
+              blank: "Categoria de cuenta contable es requerida"
+            tipo_cuenta_id:
+              blank: "Tipo de cuenta contable es requerida"
+            nombre_cuenta:
+              blank: "Nombre de cuenta contable es requerida"
+            numero_cuenta:
+              blank: "Numero de cuenta contable es requerida"
+        tipo_retencion:
+          attributes:
+            tipo_retencion:
+              blank: "Tipo de retención es requerido"
+        tipo_tasa_retencion:
+          attributes:
+            tipo_retencion_id:
+              blank: "Tipo de retencion es requerido"
+            tasa:
+              blank: "Tasa es requerida"
+              not_a_number: "no es un número válido"
+        role:
+          attributes:
+            name:
+              blank: "Nombre es requerido"
+        periodo_contable:
+          attributes:
+            periodo:
+              taken: "El periodo contable ya existe"
+            periodo_contable_estado_id:
+              blank: "Debe seleccionar un estado."
+
+#Define los nombres de los modelos
+    models:
+      log_transaccional:
+        one: "Log Transaccional"
+        other: "Logs Transaccionales"
+      role:
+        one: "Rol"
+        other: "Roles"
+      proveedores:
+        one: "Proveedor"
+        other: "Proveedores"
+      factura_de_vent:
+        one: "Factura de Venta"
+        other: "Facturas de Venta"
+      tipo_tasa_retencion:
+        one: "Tipo de Tasa de Retención"
+        other: "Tipos de Tasa de Retención"
+      clase_servicio:
+        one: "Clase de Servicio"
+        other: "Clases de Servicio"
+      tipo_pago:
+        one: "Tipo de Pago"
+        other: "Tipos de Pago"
+      tasa_cambio_fija:
+        one: "Tasa de Cambio Fija"
+        other: "Tasas de Cambio Fijas"
+      tasa_cambio_oficial:
+        one: "Tasa de Cambio Oficial"
+        other: "Tasas de Cambio Oficiales"
+      detalle_transaccion:
+        one: "Detalle de Transacciones"
+        other: "Detalle de Transacciones"
+      producto:
+        one: "Producto / Servicio"
+        other: "Productos / Servicios"
+      retencion:
+        one: "Retencion en la Fuente"
+        other: "Retenciones en la Fuente"
+      ajuste_inventario:
+        one: "Ajuste de Inventario"
+        other: "Ajustes de Inventario"
+      bodega:
+        one: "Bodega"
+        other: "Bodegas"
+      movimiento_inventario:
+        one: "Movimiento de Inventario"
+        other: "Movimientos de Inventario"
+      informe_cuadro_de_cuentas:
+        one: "Cuandro de Cuentas"
+        other: "Cuadro de Cuentas"
+      tipo_retencion:
+        one: "Institucion Retenedora"
+        other: "Instituciones Retenedoras"
+      tipo_tasa_retencion:
+        one: "Retencion"
+        other: "Retenciones"
+      tabla_alcaldia:
+        one: "Tabla de Alcadía"
+        other: "Tablas de Alcadía"
+      concepto_breve_comprobante:
+        one: "Concepto Breve de Comprobantes"
+        other: "Concepto Breve de Comprobantes"
+      unidad_medida:
+        one: "Unidad de Medidas"
+        other: "Unidad de Medidas"
+      cotizacion:
+        one: "Cotización"
+        other: "Cotizaciones"
+      cierre_fiscal:
+        one: "Cierre Fiscal"
+        other: "Cierres Fiscales"
+      costo_importacion:
+        one: "Importacion"
+        other: "Importaciones"
+
+
+#Define los nombres de los atributos de los modelos
+    attributes:
+      role:
+        name: "Rol"
+        role_enabled: "Rol habilitado"
+  active_admin:
+    dashboard: Inicio
+    dashboard_welcome:
+      welcome: "Bienvenido a Active Admin. Esta es la página de inicio predeterminada."
+      call_to_action: "Para agregar secciones edite 'app/admin/dashboards.rb'"
+    view: "Ver"
+    edit: "Editar"
+    delete: "Eliminar"
+    delete_confirmation: "¿Está seguro de que quiere eliminar esto?"
+    new_model: "Crear %{model}"
+    create_model: "Crear %{model}"
+    edit_model: "Editar %{model}"
+    update_model: "Editar %{model}"
+    delete_model: "Eliminar %{model}"
+    details: "Detalles de %{model}"
+    cancel: "Cancelar"
+    empty: "Vacío"
+    previous: "Anterior"
+    next: "Siguiente"
+    download: "Descargar:"
+    has_many_new: "Crear %{model}"
+    has_many_delete: "Eliminar"
+    filter: "Filtrar"
+    clear_filters: "Quitar Filtros"
+    search_field: "Buscar %{field}"
+    equal_to: "Igual a"
+    greater_than: "Mayor que"
+    less_than: "Menor que"
+    main_content: "Por favor implemente %{model}#main_content para mostrar contenido."
+    logout: "Salir"
+    sidebars:
+      filters: "Filtros"
+    pagination:
+      empty: "Ningún %{model} encontrado"
+      one: "Mostrando <b>1</b> %{model}"
+      one_page: "Mostrando <b>todos(as) los(as) %{n}</b> %{model}"
+      multiple: "Mostrando %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> de un total de <b>%{total}</b>"
+    blank_slate:
+      content: "No hay %{resource_name} aún."
+      link: "Crear"
+      entry:
+        one: "registro"
+        other: "registros"
+    any: "Cualquiera"
+    batch_actions:
+      button_label: "Acciones en masa"
+      delete_confirmation: "¿Está seguro de que quiere eliminar estos %{plural_model}? No podrá deshacer esta opción."
+      succesfully_destroyed:
+        one: "Se ha destruido 1 %{model} exitosamente"
+        other: "Se han destruido %{count} %{plural_model} exitosamente"
+      selection_toggle_explanation: "(Cambiar Selección)"
+      link: "Crea 1"
+      action_label: "%{title} Seleccionado"
+      labels:
+        destroy: "Borrar"
+    comments:
+      body: "Cuerpo"
+      author: "Autor"
+      title: "Comentario"
+      add: "Comentar"
+      resource: "Recurso"
+      no_comments_yet: "Sin comentarios todavía."
+      title_content: "Comentarios (%{count})"
+      errors:
+        empty_text: "El comentario no fue guardado, el texto estaba vacío."
+  devise:
+    login:
+      title: "iniciar sesión"
+      remember_me: "Recuérdame"
+      submit: "iniciar sesión"
+    reset_password:
+      title: "¿Olvidó su contraseña?"
+      submit: "Restablecer mi contraseña"
+    change_password:
+      title: "Cambie su contraseña"
+      submit: "Cambiar mi contraseña"
+    failure:
+      admin_user:
+        unauthenticated: "Cuenta de usuario no autenticada"
+        invalid: "Usuario Inválido"
+        not_found_in_database: "Usuario Inválido"
+        already_authenticated: "Cuenta de usuario autenticada"
+        timeout: "Su sesión ha expirado, por favor identifíquese de nuevo para continuar."
+    links:
+      sign_in: "registrarse"
+      forgot_your_password: "¿Olvidó su contraseña?"
+    sessions:
+      admin_user:
+        signed_in: "Ha iniciado sesión satisfactoriamente"
+        unaunthenticated: "Cuenta de usuario no autenticada"
+        invalid: "Correo electrónico o contraseña no válidos."
+    mailer:
+      confirmation_instructions:
+        subject: "Instrucciones de confirmación"
+      reset_password_instructions:
+        subject: "Instrucciones de restablecimiento de contraseña."
+      unlock_instructions:
+        subject: "Instrucciones de desbloqueo"
+    passwords:
+      send_instructions: "Usted recibirá un correo electrónico con instrucciones para restablecer la contraseña en unos pocos minutos."
+      updated: "Su contraseña ha sido cambiada exitosamente."
+
+  views:
+      pagination:
+          truncate: "..."
+          first: "Inicio"
+          previous: "Anterior"
+          next: "Siguiente"
+          last: "Último"
+  formtastic:
+    yes: "Sí"
+    no: "No"
+    create: "Guardar %{model}"
+    update: "Guardar %{model}"
+    submit: "Aceptar"
+    cancel: "Cancelar"
+    reset: "Resetear %{model}"
+    required: "requerido"
+  date:
+    formats:
+      default: '%d-%m-%Y'
+      long: '%d-%m-%Y'
+      short: '%d-%m-%Y'
+    day_names: [Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado]
+    abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    order:
+      - :day
+      - :month
+      - :year
+  time:
+    am: am
+    pm: pm
+    formats:
+      default: "%a, %d de %B de %Y a las %H:%M:%S %Z"
+      long: "%a, %d de %B de %Y a las %I:%M %p"
+      short: "%d de %B de %Y a las %I:%M %p"
+  time_zone: "Zona horaria"
+#Define los formatos de numeros para conversion a moneda o delimitados y separados por decimales
+  number:
+    format:
+      delimiter: ','
+      precision: 2
+      separator: ! '.'
+      significant: false
+      strip_insignificant_zeros: false
+  support:
+    array:
+      two_words_connector: ". "
+  cotizaciones_input:
+    prompt: Escoja una opcion
+
+  ransack:
+    search: "buscar"
+    predicate: "predicado"
+    and: "y"
+    or: "o"
+    any: "cualquier"
+    all: "todos"
+    combinator: "combinado"
+    attribute: "atributo"
+    value: "valor"
+    condition: "condición"
+    sort: "ordernar"
+    asc: "ascendente"
+    desc: "descendente"
+    predicates:
+      eq: "es igual a"
+      eq_any: "es igual a cualquier"
+      eq_all: "es igual a todos"
+      not_eq: "no es igual a"
+      not_eq_any: "no es igual a cualquier"
+      not_eq_all: "no es iguala todos"
+      matches: "coincidir"
+      matches_any: "coincidir a cualquier"
+      matches_all: "coincidir a todos"
+      does_not_match: "no coincide"
+      does_not_match_any: "no coincide con ninguna"
+      does_not_match_all: "no coincide con todos"
+      lt: "menor que"
+      lt_any: "menor que cualquier"
+      lt_all: "menor que todos"
+      lteq: "menor que o igual a"
+      lteq_any: "menor o igual a cualquier"
+      lteq_all: "menor o igual a todos"
+      gt: "mayor que"
+      gt_any: "mayor que cualquier"
+      gt_all: "mayor que todos"
+      gteq: "mayor que o igual a"
+      gteq_any: "mayor que o igual a cualquier"
+      gteq_all: "mayor que o igual a todos"
+      in: "en"
+      in_any: "en cualquier"
+      in_all: "en todos"
+      not_in: "no en"
+      not_in_any: "no en cualquier"
+      not_in_all: "no en todos"
+      cont: "contiene"
+      cont_any: "contiene cualquier"
+      cont_all: "contiene todos"
+      not_cont: "no contiene"
+      not_cont_any: "no contiene ninguna"
+      not_cont_all: "no contiene toda"
+      start: "comienza con"
+      start_any: "comienza con cualquier"
+      start_all: "comienza con toda"
+      not_start: "no inicia con"
+      not_start_any: "no comienza con cualquier"
+      not_start_all: "no inicia con toda"
+      end: "termina con"
+      end_any: "termina con cualquier"
+      end_all: "termina con todo"
+      not_end: "no termina con"
+      not_end_any: "no termina con cualquier"
+      not_end_all: "no termina con todo"
+      'true': "es verdadero"
+      'false': "es falso"
+      present: "es presente"
+      blank: "está en blanco"
+      'null': "es nula"
+      not_null: "no es nula"
+
+  errors:
+      messages:
+        not_saved: ""

@@ -46,6 +46,8 @@ gem 'ejs', '~> 1.1', '>= 1.1.1'
 
 gem 'execjs', '~> 2.6'
 
+gem 'kaminari', '~> 0.17.0'
+
 group :development, :test do
   gem 'selenium-webdriver'
   gem "cucumber-rails", :require => false

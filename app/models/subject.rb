@@ -1,5 +1,8 @@
 class Subject < ApplicationRecord
 
+  validates :codigo, presence: true, uniqueness: true
+  validates :nombre, presence: true
+
   def display_name
     self.nombre
   end
@@ -25,7 +28,6 @@ class Subject < ApplicationRecord
           begin
             @subject.save!
           rescue => ex
-            byebug
             logger.error '************************************************************************************************'
             logger.error ex.message
             logger.error ex.backtrace.join("\n")

@@ -34,6 +34,18 @@ AnswerType.where(descripcion: 'Siempre o casi siempre', scala: 10).first_or_crea
 AnswerType.where(descripcion: 'Algunas veces', scala: 5).first_or_create!
 AnswerType.where(descripcion: 'Nunca o casi nunca', scala: 0).first_or_create!
 
+if Answer.all.blank?
+  Answer.where(answer_type_id: 1, user_type_id: 1).first_or_create!
+  Answer.where(answer_type_id: 2, user_type_id: 1).first_or_create!
+  Answer.where(answer_type_id: 3, user_type_id: 1).first_or_create!
+  Answer.where(answer_type_id: 4, user_type_id: 1).first_or_create!
+  Answer.where(answer_type_id: 5, user_type_id: 1).first_or_create!
+
+  Answer.where(answer_type_id: 6, user_type_id: 3).first_or_create!
+  Answer.where(answer_type_id: 7, user_type_id: 3).first_or_create!
+  Answer.where(answer_type_id: 8, user_type_id: 3).first_or_create!
+end
+
 if Question.all.blank?
   Question.where(descripcion: 'El profesor propone bibliografía y recursos informáticos que son útiles para la clase.',
                   question_type_id: 1, user_type_id: 1).first_or_create!
@@ -96,6 +108,30 @@ if Question.all.blank?
   Question.where(descripcion: 'Si tuvieras oportunidad de volver a tomar clases con este profesor, ¿lo harías?',
                   question_type_id: 4, user_type_id: 1).first_or_create!
 end
+
+Level.where(nombre: 'Primero').first_or_create!
+Level.where(nombre: 'Segundo').first_or_create!
+Level.where(nombre: 'Tercero').first_or_create!
+Level.where(nombre: 'Cuarto').first_or_create!
+Level.where(nombre: 'Quinto').first_or_create!
+
+Interval.where(nombre: 'I Cuatrimestre').first_or_create!
+Interval.where(nombre: 'II Cuatrimestre').first_or_create!
+Interval.where(nombre: 'III Cuatrimestre').first_or_create!
+Interval.where(nombre: 'IV Cuatrimestre').first_or_create!
+Interval.where(nombre: 'VI Cuatrimestre').first_or_create!
+Interval.where(nombre: 'I Trimestre').first_or_create!
+Interval.where(nombre: 'II Trimestre').first_or_create!
+Interval.where(nombre: 'III Trimestre').first_or_create!
+Interval.where(nombre: 'IV Trimestre').first_or_create!
+Interval.where(nombre: 'VI Trimestre').first_or_create!
+
+Group.where(nombre: 'I').first_or_create!
+Group.where(nombre: 'II').first_or_create!
+Group.where(nombre: 'III').first_or_create!
+Group.where(nombre: 'IV').first_or_create!
+Group.where(nombre: 'VI').first_or_create!
+
 if Admin.all.blank?
   Admin.create!(email: 'sei@sei.com', password: '123123')
 end

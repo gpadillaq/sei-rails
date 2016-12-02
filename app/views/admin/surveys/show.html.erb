@@ -30,6 +30,7 @@
         <th>Grupo</th>
         <th>Intervalo</th>
         <th>Asignatura</th>
+        <th>Docente</th>
       </tr>
     </thead>
     <tbody>
@@ -37,10 +38,11 @@
         <tr>
           <td><%= us.user.display_name %></td>
           <td><%= us.user_type.display_name %></td>
-          <td><%= us.level.display_name %></td>
-          <td><%= us.group.display_name %></td>
-          <td><%= us.interval.display_name %></td>
-          <td><%= us.subject.display_name %></td>
+          <td><%= us.try(:level).try(:display_name) %></td>
+          <td><%= us.try(:group).try(:display_name) %></td>
+          <td><%= us.try(:interval).try(:display_name) %></td>
+          <td><%= us.try(:subject).try(:display_name) %></td>
+          <td><%= us.try(:docente).try(:display_name) %></td>
         </tr>
       <% end %>
     </tbody>

@@ -26,22 +26,23 @@ class Survey < ApplicationRecord
             level_id: Level.find_by_id(user_survey_record.third).try(:id),
             group_id: Group.find_by_id(user_survey_record.fourth).try(:id),
             interval_id: Interval.find_by_id(user_survey_record.fifth).try(:id),
-            subject_id: Subject.find_by_codigo(user_survey_record.last).try(:id),
+            subject_id: Subject.find_by_codigo(user_survey_record[5]).try(:id),
+            docente_id: User.find_by_codigo(user_survey_record[6]).try(:id),
             survey_id: self.id
           }
           @user_survey = UserSurvey.new(atributos)
           logger.info '************************************************************************************************'
           logger.info "* Registrando User: #{user_survey_record[1]}"
           logger.info "*   Survey: #{self.id}"
-        end
-        begin
-          @user_survey.save!
-        rescue => ex
-          logger.error '************************************************************************************************'
-          logger.error ex.message
-          logger.error ex.backtrace.join("\n")
-          logger.error '************************************************************************************************'
-          @errors.push([@user_survey.try(:user).try(:display_name), @user_survey.try(:subject).try(:codigo)].join("-"))
+          begin
+            @user_survey.save!
+          rescue => ex
+            logger.error '************************************************************************************************'
+            logger.error ex.message
+            logger.error ex.backtrace.join("\n")
+            logger.error '************************************************************************************************'
+            @errors.push([@user_survey.try(:user).try(:display_name), @user_survey.try(:subject).try(:codigo)].join("-"))
+          end
         end
         if @errors.present?
           raise ArgumentError, @errors
