@@ -1,11 +1,15 @@
 class Admin::SurveyResultsController < Admin::BaseController
   before_action :set_survey_result, only: [:show, :edit, :update, :destroy]
+  before_action :scoped_collection, only: [:index, :quantitative_result]
+
+  def scoped_collection
+    @q = SurveyResult.ransack(params[:q])
+    @survey_results = @q.result
+  end
 
   # GET /survey_results
   # GET /survey_results.json
   def index
-    @q = SurveyResult.ransack(params[:q])
-    @survey_results = @q.result
     respond_to do |format|
       format.html do
         @survey_results = @survey_results.page(params[:page])
@@ -14,6 +18,10 @@ class Admin::SurveyResultsController < Admin::BaseController
         @survey_results
       end
     end
+  end
+
+  def quantitative_result
+    @survey_results = @survey_results.quantitative_result
   end
 
   # GET /survey_results/1

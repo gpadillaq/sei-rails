@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :survey_results do
       collection do
         get :xlsx
+        get :quantitative_result#', to: 'survey_results#quantitative_result', via: :get
       end
     end
     resources :subjects do
@@ -44,6 +45,9 @@ Rails.application.routes.draw do
   resources :users
   resources :surveys
   resources :survey_results do
-    collection { post :docente }
+    collection do
+      post :docente
+      get :quantitative_result
+    end
   end
 end

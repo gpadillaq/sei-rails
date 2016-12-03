@@ -5,3 +5,5 @@
     :url: admin_survey_results_path
   - :label: Comentarios
     :url: admin_survey_comments_path
+  - :label: Resultados Totales
+    :url: quantitative_result_admin_survey_results_path
