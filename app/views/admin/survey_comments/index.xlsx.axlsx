@@ -1,0 +1,18 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Comentarios de las evaluaciones") do |sheet|
+  render partial: 'admin/header',
+         locals: {
+           wb: wb, sheet: sheet, merge: 7
+         }
+  sheet.add_row(["Tipo de Usuario", "Docente", "Grupo", "Nivel", "Intervalo", "Asignatura", "Descripción"], style: @title_cell)
+  @survey_comments.each do |survey_comment|
+    sheet.add_row([survey_comment.user_survey.user_type.display_name,
+      survey_comment.user_survey.try(:docente).try(:display_name),
+      survey_comment.user_survey.try(:group).try(:display_name),
+      survey_comment.user_survey.try(:level).try(:display_name),
+      survey_comment.user_survey.try(:interval).try(:display_name),
+      survey_comment.user_survey.try(:subject).try(:display_name),
+      survey_comment.descripcion
+    ])
+  end
+end

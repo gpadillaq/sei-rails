@@ -6,11 +6,12 @@ class Admin::SurveyCommentsController < Admin::BaseController
   def index
     respond_to do |format|
       @q = SurveyComment.ransack(params[:q])
+      @survey_comments = @q.result
       format.html do
-        @survey_comments = @q.result(distinct: true)
+        @survey_comments = @survey_comments.page(params[:page])
       end
       format.xlsx do
-        @survey_comments = @q.result(distinct: true)
+        @survey_comments
       end
     end
   end

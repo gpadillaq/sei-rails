@@ -5,7 +5,7 @@
     </div>
     <div class="small-4 column">
       <%= link_to 'Graficos', '', id: 'grafico', class: 'button'%>
-      <%= link_to 'Exportar', admin_survey_results_path(format: 'xlsx', params: params), id: 'grafico', class: 'button'%>
+      <%= link_to 'Exportar', admin_survey_results_path(format: 'xlsx', params: {q: params[:q].try(:to_unsafe_h)}), id: 'grafico', class: 'button'%>
     </div>
     <div class="row scopes">
       <div class="small-12 column">
@@ -25,6 +25,7 @@
     <thead>
       <tr>
         <th>Tipo de Usuario</th>
+        <th>Docente</th>
         <th>Grupo</th>
         <th>Nivel</th>
         <th>Intervalo</th>
@@ -38,15 +39,23 @@
       <% @survey_results.each do |survey_result| %>
         <tr>
           <td><%= survey_result.user_survey.user_type.display_name %></td>
-          <td><%= survey_result.user_survey.group.display_name %></td>
-          <td><%= survey_result.user_survey.level.display_name %></td>
-          <td><%= survey_result.user_survey.interval.display_name %></td>
-          <td><%= survey_result.user_survey.subject.display_name %></td>
+          <td><%= survey_result.user_survey.try(:docente).try(:display_name) || '' %></td>
+          <td><%= survey_result.user_survey.try(:group).try(:display_name) %></td>
+          <td><%= survey_result.user_survey.try(:level).try(:display_name) %></td>
+          <td><%= survey_result.user_survey.try(:interval).try(:display_name) %></td>
+          <td><%= survey_result.user_survey.try(:subject).try(:display_name) %></td>
           <td><%= survey_result.question.display_name %></td>
-          <td><%= survey_result.answer.display_name %></td>
+          <td><%= survey_result.try(:answer).try(:display_name) %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <div class="row">
+    <div class="small-12 column">
+      <%= paginate @survey_results %>
+      <%= page_entries_info  @survey_results %>
+    </div>
+  </div>
+
 </div>
 <%= javascript_include_tag    'admin/survey_results'%>

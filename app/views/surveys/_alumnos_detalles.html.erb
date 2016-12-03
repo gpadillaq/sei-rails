@@ -8,14 +8,24 @@
     </th>
   </thead>
   <tbody>
+    <% name = "survey_results" %>
     <% @questions.each do |question| %>
       <tr>
+        <% name_prefix = "#{name}[#{Time.current.to_i}#{question.id}#{user_survey.id}]" %>
+        <input type="hidden" name="<%= name_prefix %>[question_id]" value="<%= question.id %>">
+        <input type="hidden" name="<%= name_prefix %>[user_survey_id]" value="<%= user_survey.id %>">
         <td><%= question.display_name %></td>
         <td>
           <% @answers.each do |answer| %>
-            <input type="radio" id="answer_<%=answer.id %>" name="post[category]" value="<% answer.id %>" />
+            <input type="radio" id="answer_<%=answer.id %>" name="<%= name_prefix %>[answer_id]" value="<%= answer.id %>" required/>
           <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<hr>
+<label>Observaciones: </label>
+<% name_prefix_comment = "survey_comments[survey_comment_#{user_survey.id}]" %>
+<input type="hidden" name="<%= name_prefix_comment %>[user_survey_id]" value="<%= user_survey.id %>">
+<textarea id="survey_comment_<%= user_survey.id %>" name="<%= name_prefix_comment %>[descripcion]"></textarea>

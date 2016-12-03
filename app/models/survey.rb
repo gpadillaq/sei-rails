@@ -69,7 +69,7 @@ class Survey < ApplicationRecord
   end
 
   def self.user_surveys_active(current_user)
-    survey = Survey.where(active: true).where('inicio >= ? or fin <= ?', Date.today, Date.today).first
+    survey = Survey.where(active: true).where('inicio <= ? and fin >= ?', Date.today, Date.today).first
     user_survey_available = survey.user_surveys.where(user_id: current_user.id)
     user_type = user_survey_available.first.user_type
     plantilla = PLATILLAS[user_type.id]
@@ -77,5 +77,34 @@ class Survey < ApplicationRecord
     answers = Answer.where(user_type_id: user_type.id)
 
     [survey, user_survey_available, plantilla, questions, answers]
+  end
+
+  def self.save_survey_results(survey_results, survey_comments, user)
+    begin
+      self.transaction do
+        survey_results.each do |survey_result|
+          begin
+            SurveyResult.create(survey_result.last)
+          rescue => e
+            raise e
+          end
+        end
+        survey_comments.each do |survey_comment|
+          begin
+            SurveyComment.create(survey_comment.last)
+          rescue => e
+            raise e
+          end
+        end
+        user.user_survey.update_all(active: false)
+        user.save!
+      end
+    rescue => e
+      logger.error '*****************************************************'
+      logger.error e.message
+      logger.error e.backtrace.join("\n")
+      logger.error '*****************************************************'
+      raise
+    end
   end
 end

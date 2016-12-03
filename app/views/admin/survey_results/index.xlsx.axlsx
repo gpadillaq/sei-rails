@@ -4,13 +4,14 @@ wb.add_worksheet(name: "Resultado de las evaluaciones") do |sheet|
          locals: {
            wb: wb, sheet: sheet, merge: 7
          }
-  sheet.add_row(["Tipo de Usuario", "Grupo", "Nivel", "Intervalo", "Asignatura", "Pregunta", "Respuesta"], style: @title_cell)
+  sheet.add_row(["Tipo de Usuario", "Docente", "Grupo", "Nivel", "Intervalo", "Asignatura", "Pregunta", "Respuesta"], style: @title_cell)
   @survey_results.each do |survey_result|
     sheet.add_row([survey_result.user_survey.user_type.display_name,
-      survey_result.user_survey.group.display_name,
-      survey_result.user_survey.level.display_name,
-      survey_result.user_survey.interval.display_name,
-      survey_result.user_survey.subject.display_name,
+      survey_result.user_survey.try(:docente).try(:display_name),
+      survey_result.user_survey.try(:group).try(:display_name),
+      survey_result.user_survey.try(:level).try(:display_name),
+      survey_result.user_survey.try(:interval).try(:display_name),
+      survey_result.user_survey.try(:subject).try(:display_name),
       survey_result.question.display_name,
       survey_result.answer.display_name
     ])

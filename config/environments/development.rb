@@ -56,5 +56,5 @@ Rails.application.configure do
   #    is an example of default_url_options appropriate for a development environment
   #  in config/environments/development.rb:
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'sei.venbrain.com'}
 end

@@ -4,7 +4,7 @@
       <h1>Comentarios de las evaluaciones</h1>
     </div>
     <div class="small-4 column">
-      <%= link_to 'Exportar', admin_survey_comments_path(format: 'xlsx', params: params), id: 'grafico', class: 'button'%>
+      <%= link_to 'Exportar', admin_survey_comments_path(format: 'xlsx', params: {q: params[:q].try(:to_unsafe_h)}), id: 'grafico', class: 'button'%>
     </div>
     <div class="row scopes">
       <div class="small-12 column">
@@ -18,6 +18,7 @@
     <thead>
       <tr>
         <th>Tipo de Usuario</th>
+        <th>Docente</th>
         <th>Grupo</th>
         <th>Nivel</th>
         <th>Intervalo</th>
@@ -30,13 +31,22 @@
       <% @survey_comments.each do |survey_comment| %>
         <tr>
           <td><%= survey_comment.user_survey.user_type.display_name %></td>
-          <td><%= survey_comment.user_survey.group.display_name %></td>
-          <td><%= survey_comment.user_survey.level.display_name %></td>
-          <td><%= survey_comment.user_survey.interval.display_name %></td>
-          <td><%= survey_comment.user_survey.subject.display_name %></td>
+          <td><%= survey_comment.user_survey.try(:docente).try(:display_name) %></td>
+          <td><%= survey_comment.user_survey.try(:group).try(:display_name) %></td>
+          <td><%= survey_comment.user_survey.try(:level).try(:display_name) %></td>
+          <td><%= survey_comment.user_survey.try(:interval).try(:display_name) %></td>
+          <td><%= survey_comment.user_survey.try(:subject).try(:display_name) %></td>
           <td><%= survey_comment.descripcion %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <div class="row">
+    <div class="small-12 column">
+      <%= paginate @survey_comments %>
+      <%= page_entries_info  @survey_comments %>
+    </div>
+  </div>
+
+
 </div>

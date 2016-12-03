@@ -4,13 +4,14 @@ class Admin::SurveyResultsController < Admin::BaseController
   # GET /survey_results
   # GET /survey_results.json
   def index
+    @q = SurveyResult.ransack(params[:q])
+    @survey_results = @q.result
     respond_to do |format|
-      @q = SurveyResult.ransack(params[:q])
       format.html do
-        @survey_results = @q.result(distinct: true)
+        @survey_results = @survey_results.page(params[:page])
       end
       format.xlsx do
-        @survey_results = @q.result(distinct: true)
+        @survey_results
       end
     end
   end
