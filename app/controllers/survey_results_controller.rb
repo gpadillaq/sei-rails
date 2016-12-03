@@ -16,6 +16,17 @@ class SurveyResultsController < BaseController
     end
   end
 
+  def docente
+    data = Survey.docente_survey(params[:survey_results].to_a, current_user)
+    files = Array.new
+    data.each_with_index do |d, i|
+      file_name = "sei_#{current_user.display_name}_#{Time.current.to_i}#{i}".dehumanize
+      files.push({path: PDFGenerator::Generator.get_pdf(d, "docente", file_name)[:data], name: file_name})
+    end
+    UserMailer.docente_email(current_user, files).deliver_now
+    sign_out_and_redirect current_user
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_result_params

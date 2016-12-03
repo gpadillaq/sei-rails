@@ -96,7 +96,7 @@ class Survey < ApplicationRecord
             raise e
           end
         end
-        user.user_survey.update_all(active: false)
+        UserSurvey.where(user_id: user.id).update_all(activa: false)
         user.save!
       end
     rescue => e
@@ -106,5 +106,47 @@ class Survey < ApplicationRecord
       logger.error '*****************************************************'
       raise
     end
+  end
+
+  def self.docente_survey(survey_results, user)
+    begin
+      docente_surveys = Array.new
+      self.transaction do
+        survey_results.each do |survey_result|
+          begin
+            survey_result = survey_result.last
+            user_survey = UserSurvey.find_by_id(survey_result[:user_survey_id])
+            interval = user_survey.try(:interval).try(:display_name)
+            level = user_survey.try(:level).try(:display_name)
+
+            docente_surveys.push({
+              page_1: {
+                nombre: {value: user.try(:display_name)},
+                ciclo_and_year: {value: [interval, level].join('-')},
+                (['dimension1', "nivel#{survey_result[:dimension1]}"].join('_')).to_sym => {value: 'X'},
+                (['dimension2', "nivel#{survey_result[:dimension2]}"].join('_')).to_sym => {value: 'X'}
+              },
+              page_2: {
+                (['dimension3', "nivel#{survey_result[:dimension3]}"].join('_')).to_sym => {value: 'X'},
+                (['dimension4', "nivel#{survey_result[:dimension4]}"].join('_')).to_sym => {value: 'X'},
+                (['dimension5', "nivel#{survey_result[:dimension5]}"].join('_')).to_sym => {value: 'X'},
+                comentarios: {value: survey_result[:comentarios]}
+              }
+            })
+          rescue => e
+            raise e
+          end
+        end
+        UserSurvey.where(user_id: user.id).update_all(activa: false)
+        user.save!
+      end
+    rescue => e
+      logger.error '*****************************************************'
+      logger.error e.message
+      logger.error e.backtrace.join("\n")
+      logger.error '*****************************************************'
+      raise
+    end
+    docente_surveys
   end
 end

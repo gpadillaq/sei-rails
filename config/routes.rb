@@ -43,5 +43,7 @@ Rails.application.routes.draw do
   root to: "surveys#index"
   resources :users
   resources :surveys
-  resources :survey_results
+  resources :survey_results do
+    collection { post :docente }
+  end
 end

@@ -1,0 +1,310 @@
+  <% name = "survey_results[#{Time.current.to_i}#{user_survey.id}]" %>
+  <input type="hidden" name="<%= name %>[user_survey_id]" value="<%= user_survey.id %>">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">
+          I. Dimensión: Planeación
+        </th>
+      </tr>
+      <tr>
+        <td colspan="3">
+          Es la previsión organizada y sistemática de todos los aspectos necesarios para la realización del proceso E-A (fases, prioridades, recursos humanos y materiales), durante un periodo determinado: un curso, una unidad, un tema o una clase.
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Nivel 1:
+        </td>
+        <td>
+          Realizo la planeación inicial de mis cursos, llenando los formatos pedidos. Preparo mis clases con poca anticipación y en ocasiones improviso. Me voy guiando con el libro o el temario.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension1]" value="1" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 2:
+        </td>
+        <td>
+          Realizo adecuadamente la planeación inicial con los requisitos necesarios. Busco llevar dicha planeación a la realidad aunque con algunas dificultades, preparo mis clases con anticipación y previendo cuando me es posible los recursos técnicos o didácticos necesarios.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension1]" value="2" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 3:
+        </td>
+        <td>
+          Realizo adecuadamente y con cuidado la planeación inicial del curso cubriendo los requisitos y utilizándola de manera cotidiana para la preparación de mis clases. Lo cual me permite tener claro los objetivos del curso y  de cada clase además de prever los recursos técnicos o didácticos
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension1]" value="3" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 4:
+        </td>
+        <td>
+          Además de realizar todo lo expresado en el punto anterior. Al inicio del curso corrijo mi planeación de acuerdo con las características del grupo y la voy ajustando a lo largo del ciclo considerando la realidad del grupo pero sin perder de vista los objetivos del curso.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension1]" value="4" required>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">
+          II. Dimensión: Proceso enseñanza aprendizaje
+        </th>
+      </tr>
+      <tr>
+        <td colspan="3">
+          Se refiere a la metodología que utiliza el docente para llevar a cabo su labor. Contempla el diseño de objetivos, de estrategias de enseñanza y de aprendizaje. Además de la organización de un ambiente tanto físico como humano que propicie el aprendizaje y un clima relacional que se caracteriza por la vivencia de los valores lasallistas.
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Nivel 1:
+        </td>
+        <td>
+          Me preocupo por dar el tema. Tengo dificultades para hacerme entender por los alumnos.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension2]" value="1" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 2:
+        </td>
+        <td>
+          Desarrollo mis clases de manera que los alumnos participen y comprendan los temas. Sin embargo me doy cuenta que en algunos temas o grupos se me dificulta lograrlo.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension2]" value="2" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 3:
+        </td>
+        <td>
+          Desarrollo mis clases bien, con claridad y con técnicas variadas. Fomento un ambiente de aprendizaje en el aula.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension2]" value="3" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 4:
+        </td>
+        <td>
+          Logro que mis alumnos desarrollen la habilidad de aprender a aprender y el ambiente en el aula favorece la formación integral de ellos.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension2]" value="4" required>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">
+          III. Dimensión: Relación maestro alumno
+        </th>
+      </tr>
+      <tr>
+        <td colspan="3">
+          Se refiere a la relación que establece el maestro con sus alumnos distinguiéndose por ser cálida, afable y firme. Facilitando el aprendizaje y la formación integral de ellos. Mantiene una actitud positiva y no hace distinciones entre ellos.
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Nivel 1
+        </td>
+        <td>
+          Considero que mi función primordial es impartir la clase, manteniendo relaciones respetuosas con mis alumnos en la medida que es necesario para impartirla.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension3]" value="1" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 2:
+        </td>
+        <td>
+          Trato de comprender la etapa de vida de  mis alumnos y de relacionarme con ellos en el aula. Aunque reconozco que me cuesta trabajo en algunos casos individuales.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension3]" value="2" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 3:
+        </td>
+        <td>
+          Comprendo a mis alumnos en su situación de vida, promuevo el diálogo e interactúo con ellos buscando apoyar su formación integral.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension3]" value="3" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 4:
+        </td>
+        <td>
+          Considero que la relación maestro alumno es una oportunidad para crear, estar atento y aprovechar las oportunidades de acompañamiento al alumno en su proceso de vida y contribuir a que sea mejor persona.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension3]" value="4" required>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">
+          IV. Dimensión: Prácticas de Evaluación
+        </th>
+      </tr>
+      <tr>
+        <td colspan="3">
+          Proceso sistemático, permanente y organizado que le permite hacer juicios y tomar decisiones acerca del desempeño de los estudiantes.
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Nivel 1:
+        </td>
+        <td>
+          Evalúo a mis alumnos para otorgarles una calificación
+          Generalmente con un examen como único instrumento.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension4]" value="1" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 2:
+        </td>
+        <td>
+          Evaluó a mis alumnos para otorgarles una calificación utilizando criterios claros y precisos. Y procuro ser consistente en la aplicación de esos criterios a lo largo del curso.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension4]" value="2" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 3:
+        </td>
+        <td>
+          Evalúo a mis alumnos más que para otorgar una calificación, para dar un seguimiento a su desempeño; y en la mayoría de las veces retroalimento sus tareas, trabajos, exámenes, etc.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension4]" value="3" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 4:
+        </td>
+        <td>
+          Evalúo a mis alumnos como un proceso formativo para dar un seguimiento a su desempeño y a su formación. Utilizo criterios claros y objetivos con instrumentos de diagnóstico y con diferentes medios de evaluación.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension4]" value="4" required>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">
+          V. Dimensión: Cumplimiento administrativo
+        </th>
+      </tr>
+      <tr>
+        <td colspan="3">
+          Es la labor que realiza el profesor para dar respuesta a las diversas actividades y/o instrucciones de carácter administrativo por parte de las autoridades de la escuela; tales como entrega de la planeación del curso, reportes de calificaciones, de asistencia, de participación de los alumnos, entre otros.
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Nivel 1:
+        </td>
+        <td>
+          Cumplo con las tareas administrativas solicitadas, pero en uno o más casos con retrasos u omisiones. Reconozco que en ocasiones a mi trabajo le falta la calidad suficiente.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension5]" value="1" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 2:
+        </td>
+        <td>
+          Cumplo a tiempo con todas las tareas solicitadas aunque considero que la calidad de mi trabajo puede mejorar.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension5]" value="2" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 3:
+        </td>
+        <td>
+          Cumplo en tiempo y forma con las tareas solicitadas  cuidando que la información esté completa y disponiendo de evidencias concretas para respaldarla. Ejemplo, además de reportar el número de faltas del alumno, dispongo de un registro claro, preciso y actualizado de su asistencia.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension5]" value="3" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Nivel 4:
+        </td>
+        <td>
+          Además de entregar en tiempo y forma las tareas solicitadas, cuidar su calidad y disponer de respaldo para dicha información. Llevo un control de dichos registros, lo cual me permite proporcionar a las autoridades de la universidad información precisa en cualquier momento. He propuesto elementos innovadores para hacer más prácticos, útiles y completos dichos procesos.
+        </td>
+        <td>
+          <input type="radio" name="<%= name %>[dimension5]" value="4" required>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <label for="">Comentarios u Observaciones</label>
+  <textarea rows="4" cols="50" placeholder="Observaciones" name="<%= name %>[comentarios]"></textarea>
